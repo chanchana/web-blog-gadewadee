@@ -5,6 +5,8 @@ import { Color } from '../constants/Color';
 import HighlightBrushSrc from '../public/highlight_brush.png';
 import HeaderImageSrc from '../public/images/header_image.png';
 import Arrow from '../public/icons/arrow.svg';
+import { Text } from '../constants/Text';
+import { Font } from '../constants/Font';
 
 const showCategoryCount = 5;
 
@@ -48,16 +50,13 @@ const DesktopNavComponent = ({ state }) => {
 
     const SubNav = () => (
         isSelectedSubCategory && <SubNavContainer>
-            <SubNavTitle>ไอเดียดี ๆ</SubNavTitle>
+            <SubNavTitle>{Text.CategoryEtc}</SubNavTitle>
             <SubNavListContainer>
-                {subCategories.map(([name, link], index) => {
-                    // const isSelected = getCurrentCategoryUrl() === link;
-                    return (
+                {subCategories.map(([name, link], index) => (
                     <Link link={link}>
                         <SubNavItem selected={currentCategoryUrl === link}>{name}</SubNavItem>
                     </Link>
-                    )
-                })}
+                ))}
             </SubNavListContainer>
         </SubNavContainer>
     )
@@ -68,8 +67,8 @@ const DesktopNavComponent = ({ state }) => {
             <HeaderImageOverlay />
             <HeaderTextContainer>
                 <HeaderText>
-                    <HeaderTextHeading>พอ-ดี-ต่อ-ใจ</HeaderTextHeading>
-                    <HeaderTextSubHeading>แหล่งรวมความรู้การตลาดและการจัดการดี ๆ ให้คนคิดดีมาเรียนรู้จากกัน :)</HeaderTextSubHeading>
+                    <HeaderTextHeading>{Text.BannerHeading}</HeaderTextHeading>
+                    <HeaderTextSubHeading>{Text.BannerSubHeading}</HeaderTextSubHeading>
                 </HeaderText>
             </HeaderTextContainer>
         </HeaderImageContainer>
@@ -78,18 +77,13 @@ const DesktopNavComponent = ({ state }) => {
     return (
         <div>
             <NavigationBar>
-                {state.theme.menu.slice(0, showCategoryCount).map(([name, link], index) => {
-                // const isCurrentPage = getCurrentCategoryUrl() === link;
-                // console.log(getCurrentCategoryUrl())
-                // console.log(link)
-                return (
+                {state.theme.menu.slice(0, showCategoryCount).map(([name, link], index) => (
                     <Link link={link}>
                         <NavItem label={name} selected={currentCategoryUrl === link}/>
                     </Link>
-                );
-                })}
+                ))}
                 <div style={{position: 'relative'}}>
-                    <ExpandableNavItem label="ไอเดียดี ๆ" selected={isSelectedSubCategory}/>
+                    <ExpandableNavItem label={Text.CategoryEtc} selected={isSelectedSubCategory}/>
                     <ExpandableList expanded={expanded}>
                         {subCategories.map(([name, link], index) => {
                             return (
@@ -113,7 +107,7 @@ const DesktopNavComponent = ({ state }) => {
 export const DesktopNav = connect(DesktopNavComponent)
 
 const NavigationBar = styled.div`
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
     display: grid;
     grid-auto-flow: column;
     width: fit-content;
@@ -182,7 +176,7 @@ const ExpandableListItem = styled.div`
     overflow: hidden;
     width: 152px;
     padding: ${props => (props.expanded ? "16px" : "0 16px")};
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
 
     &:hover {
         background: #ebebeb;
@@ -196,7 +190,7 @@ const Divider = styled.div`
 `;
 
 const SubNavContainer = styled.div`
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
     margin-top: 64px;
 `;
 
@@ -225,7 +219,7 @@ const HeaderImageContainer = styled.div`
     margin-top: 40px;
     position: relative;
     display: flex;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
 `;
 
 const HeaderImage = styled.img`

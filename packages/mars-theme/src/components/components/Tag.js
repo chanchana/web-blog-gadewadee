@@ -1,14 +1,7 @@
 import { connect, styled } from "frontity";
+import { Font } from "../constants/Font";
 import { Link } from './Link';
 
-/**
- * Item Component
- *
- * It renders the preview of a blog post. Each blog post contains
- * - Title: clickable title of the post
- * - Author: name of author and published date
- * - FeaturedMedia: the featured image/video of the post
- */
 const TagComponent = ({ state, category }) => {
     const allCategory = state.source.category;
 
@@ -21,7 +14,6 @@ const TagComponent = ({ state, category }) => {
     );
 };
 
-// Connect the Item to gain access to `state` as a prop
 export const Tag = connect(TagComponent);
 
 const TagContainer = styled.div`
@@ -33,7 +25,7 @@ const TagContainer = styled.div`
     transition: 0.5s;
     margin-right: 12px;
     cursor: pointer;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
 
     &:hover {
         color: white;
