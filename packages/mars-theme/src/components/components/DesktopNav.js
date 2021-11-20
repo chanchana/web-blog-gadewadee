@@ -16,8 +16,10 @@ const DesktopNavComponent = ({ state }) => {
         setExpanded(false);
     }, [state.router.link]);
 
+    const getCurrentCategoryUrl = () => decodeURI(state.router.link).split('page')[0]
+
     const subCategories = state.theme.menu.slice(showCategoryCount);
-    const isSelectedSubCategory = subCategories.map(s => s[1]).includes(decodeURI(state.router.link));
+    const isSelectedSubCategory = subCategories.map(s => s[1]).includes(getCurrentCategoryUrl());
     const isPost = state.source.get(state.router.link).isPostType;
 
     const NavItem = ({ label, selected }) => (
@@ -39,7 +41,7 @@ const DesktopNavComponent = ({ state }) => {
             <SubNavTitle>ไอเดียดี ๆ</SubNavTitle>
             <SubNavListContainer>
                 {subCategories.map(([name, link], index) => {
-                    const isSelected = decodeURI(state.router.link) === link;
+                    const isSelected = getCurrentCategoryUrl() === link;
                     return (
                     <Link link={link}>
                         <SubNavItem selected={isSelected}>{name}</SubNavItem>
@@ -67,7 +69,9 @@ const DesktopNavComponent = ({ state }) => {
         <div>
             <NavigationBar>
                 {state.theme.menu.slice(0, showCategoryCount).map(([name, link], index) => {
-                const isCurrentPage = decodeURI(state.router.link) === link;
+                const isCurrentPage = getCurrentCategoryUrl() === link;
+                console.log(getCurrentCategoryUrl())
+                console.log(link)
                 return (
                     <Link link={link}>
                         <NavItem label={name} selected={isCurrentPage}/>
