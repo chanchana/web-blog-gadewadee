@@ -1,11 +1,12 @@
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Header from "./header";
 import List from "./list";
 import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
+import { Header } from './components'
+import './style.css'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -33,9 +34,10 @@ const Theme = ({ state }) => {
       <Global styles={globalStyles} />
 
       {/* Add the header of the site. */}
-      <HeadContainer>
+      {/* <HeadContainer>
         <Header />
-      </HeadContainer>
+      </HeadContainer> */}
+      <Header />
 
       {/* Add the main section. It renders a different component depending
       on the type of URL we are in. */}
@@ -54,10 +56,12 @@ const Theme = ({ state }) => {
 export default connect(Theme);
 
 const globalStyles = css`
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Sarabun:ital,wght@0,400;0,700;1,400;1,700&display=swap');
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #FFFFFF;
   }
   a,
   a:visited {
@@ -76,9 +80,4 @@ const HeadContainer = styled.div`
 const Main = styled.div`
   display: flex;
   justify-content: center;
-  background-image: linear-gradient(
-    180deg,
-    rgba(66, 174, 228, 0.1),
-    rgba(66, 174, 228, 0)
-  );
 `;

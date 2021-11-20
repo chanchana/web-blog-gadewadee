@@ -1,5 +1,5 @@
 import { connect, useConnect } from "frontity";
-import Link from "@frontity/components/link";
+import FrontityLink from "@frontity/components/link";
 
 /**
  * The MarsLink component, which is a wrapper on top of the {@link Link}
@@ -16,23 +16,24 @@ import Link from "@frontity/components/link";
  *
  * @returns A {@link Link} component, which returns an HTML anchor element.
  */
-const MarsLink = ({ children, ...props }) => {
+const LinkComponent = ({ children, ...props }) => {
   const { state, actions } = useConnect();
 
   /**
    * A handler that closes the mobile menu when a link is clicked.
    */
-  const onClick = () => {
+  const onClick = (event) => {
+    e.stopPropagation();
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
     }
   };
 
   return (
-    <Link {...props} onClick={onClick}>
+    <FrontityLink {...props} onClick={onClick}>
       {children}
-    </Link>
+    </FrontityLink>
   );
 };
 
-export default connect(MarsLink, { injectProps: false });
+export const Link = connect(LinkComponent, { injectProps: false });

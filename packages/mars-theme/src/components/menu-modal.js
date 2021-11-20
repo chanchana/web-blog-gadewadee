@@ -1,5 +1,5 @@
 import { styled, connect, useConnect } from "frontity";
-import Link from "./link";
+import { Link } from "./components";
 
 /**
  * The modal containing the mobile menu items.

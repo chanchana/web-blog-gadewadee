@@ -1,5 +1,5 @@
 import { connect, styled } from "frontity";
-import Link from "./link";
+import { Link } from "./components";
 import Nav from "./nav";
 import MobileMenu from "./menu";
 

@@ -14,29 +14,54 @@ const settings = {
         "theme": {
           "menu": [
             [
-              "Home",
+              "ทั้งหมด",
               "/"
             ],
             [
-              "Nature",
-              "/category/nature/"
+              "เริ่มต้นที่นี่",
+              "/category/เริ่มต้นที่นี่/"
             ],
             [
-              "Travel",
-              "/category/travel/"
+              "การตลาดที่ดี",
+              "/category/การตลาดที่ดี/"
             ],
             [
-              "Japan",
-              "/tag/japan/"
+              "การบริหารที่ดี",
+              "/category/การบริหารที่ดี/"
             ],
             [
-              "About Us",
-              "/about-us/"
-            ]
+              "การจัดการที่ดี",
+              "/category/การจัดการที่ดี/"
+            ],
+            /* Dropdown */
+            [
+              "อาหารและเครื่องดื่ม",
+              "/category/อาหารและเครื่องดื่ม/"
+            ],
+            [
+              "สินค้าเกษตร",
+              "/category/สินค้าเกษตร/"
+            ],
+            [
+              "งานคราฟท์",
+              "/category/งานคราฟท์/"
+            ],
+            [
+              "ท่องเที่ยว",
+              "/category/ท่องเที่ยว/"
+            ],
+            [
+              "อื่น ๆ",
+              "/category/อื่น ๆ/"
+            ],
+            // [
+            //   "About Us",
+            //   "/about-us/"
+            // ]
           ],
           "featured": {
-            "showOnList": false,
-            "showOnPost": false
+            "showOnList": true,
+            "showOnPost": true
           }
         }
       }
@@ -45,7 +70,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          "url": "https://testwpapigadewadee.wordpress.com/"
         }
       }
     },
