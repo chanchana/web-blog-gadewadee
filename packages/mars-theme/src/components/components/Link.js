@@ -23,6 +23,9 @@ const LinkComponent = ({ children, ...props }) => {
    * A handler that closes the mobile menu when a link is clicked.
    */
   const onClick = (event) => {
+    if (props.disabled) {
+      return
+    }
     e.stopPropagation();
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
@@ -30,9 +33,9 @@ const LinkComponent = ({ children, ...props }) => {
   };
 
   return (
-    <FrontityLink {...props} onClick={onClick}>
+    !props.disabled ? <FrontityLink {...props} onClick={onClick}>
       {children}
-    </FrontityLink>
+    </FrontityLink> : children
   );
 };
 

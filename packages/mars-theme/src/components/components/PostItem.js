@@ -1,6 +1,8 @@
 import { connect, styled } from "frontity";
 import { Link } from "./Link";
 import { FeaturedMedia, Tag } from ".";
+import { Color } from "../constants/Color";
+import { Font } from "../constants/Font";
 
 /**
  * Item Component
@@ -49,11 +51,20 @@ const PostItemContainer = styled.div`
 const Title = styled.h1`
     font-weight: 600;
     font-size: 20px;
-    color: rgba(12, 17, 43);
+    color: ${Color.PinkDark};
     margin: 16px 0;
     box-sizing: border-box;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-family: ${Font.IBMPlexSans};
     line-height: 28px;
+    height: 56px;
+    @supports (-webkit-line-clamp: 2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
 `;
 
 const Description = styled.div`

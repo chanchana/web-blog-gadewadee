@@ -1,7 +1,7 @@
 import { connect, styled, decode } from "frontity";
 // import Item from "./list-item";
 import { PostItem } from "../components";
-import Pagination from "./pagination";
+import { Pagination } from "../components/Pagination";
 
 const List = ({ state }) => {
     // Get the data of the current list.

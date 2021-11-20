@@ -70,7 +70,10 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://testwpapigadewadee.wordpress.com/"
+          "url": "https://testwpapigadewadee.wordpress.com/",
+          "params": {
+            "per_page": 1
+          }
         }
       }
     },
