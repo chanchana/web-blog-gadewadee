@@ -1,5 +1,5 @@
 import { styled, connect } from 'frontity';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from '.';
 import { Color } from '../constants/Color';
 import HighlightBrushSrc from '../public/highlight_brush.png';
@@ -11,15 +11,25 @@ const showCategoryCount = 5;
 const DesktopNavComponent = ({ state }) => {
 
     const [expanded, setExpanded] = useState(false);
+    const [categoryUrl, setCategoryUrl] = useState('/');
 
     useEffect(() => {
         setExpanded(false);
     }, [state.router.link]);
 
-    const getCurrentCategoryUrl = () => decodeURI(state.router.link).split('page')[0]
+    const getCurrentUrl = () => decodeURI(state.router.link).split('page')[0]
+
+    const currentCategoryUrl = useMemo(() => {
+        const currentUrl = getCurrentUrl();
+        if (currentUrl === '/' || currentUrl.includes('category')) {
+            setCategoryUrl(currentUrl);
+            return currentUrl;
+        }
+        return categoryUrl;
+    }, [state.router.link]);
 
     const subCategories = state.theme.menu.slice(showCategoryCount);
-    const isSelectedSubCategory = subCategories.map(s => s[1]).includes(getCurrentCategoryUrl());
+    const isSelectedSubCategory = subCategories.map(s => s[1]).includes(currentCategoryUrl);
     const isPost = state.source.get(state.router.link).isPostType;
 
     const NavItem = ({ label, selected }) => (
@@ -41,10 +51,10 @@ const DesktopNavComponent = ({ state }) => {
             <SubNavTitle>ไอเดียดี ๆ</SubNavTitle>
             <SubNavListContainer>
                 {subCategories.map(([name, link], index) => {
-                    const isSelected = getCurrentCategoryUrl() === link;
+                    // const isSelected = getCurrentCategoryUrl() === link;
                     return (
                     <Link link={link}>
-                        <SubNavItem selected={isSelected}>{name}</SubNavItem>
+                        <SubNavItem selected={currentCategoryUrl === link}>{name}</SubNavItem>
                     </Link>
                     )
                 })}
@@ -69,12 +79,12 @@ const DesktopNavComponent = ({ state }) => {
         <div>
             <NavigationBar>
                 {state.theme.menu.slice(0, showCategoryCount).map(([name, link], index) => {
-                const isCurrentPage = getCurrentCategoryUrl() === link;
-                console.log(getCurrentCategoryUrl())
-                console.log(link)
+                // const isCurrentPage = getCurrentCategoryUrl() === link;
+                // console.log(getCurrentCategoryUrl())
+                // console.log(link)
                 return (
                     <Link link={link}>
-                        <NavItem label={name} selected={isCurrentPage}/>
+                        <NavItem label={name} selected={currentCategoryUrl === link}/>
                     </Link>
                 );
                 })}
