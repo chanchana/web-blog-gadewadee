@@ -26,7 +26,7 @@ const LinkComponent = ({ children, ...props }) => {
     if (props.disabled) {
       return
     }
-    e.stopPropagation();
+    event.stopPropagation();
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
     }
