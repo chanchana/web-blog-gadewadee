@@ -18,14 +18,17 @@ export const Tag = connect(TagComponent);
 
 const TagContainer = styled.div`
     display: inline-block;
-    padding: 2px 8px;
+    padding: 4px 8px 2px;
     border: 1px solid #000000;
     box-sizing: border-box;
     border-radius: 2px;
     transition: 0.5s;
     margin-right: 12px;
+    margin-bottom: 12px;
     cursor: pointer;
     font-family: ${Font.IBMPlexSans};
+    font-size: 12px;
+    line-height: 20px;
 
     &:hover {
         color: white;

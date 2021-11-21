@@ -10,4 +10,6 @@ export const Text = {
     FooterContact: 'ติดต่อเรา',
 
     PlaceholderSearch: 'ค้นหาจากคีย์เวิร์ด',
+
+    Share: 'ส่งต่อให้คนรอบตัว',
 }

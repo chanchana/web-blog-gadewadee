@@ -43,7 +43,7 @@ const PostListContainer = styled.div`
     padding: 24px;
     display: grid;
     grid-column-gap: 16px;
-    grid-row-gap: 72px;
+    grid-row-gap: 56px;
     grid-template-columns: 1fr 1fr 1fr;
 `;
 

@@ -3,9 +3,8 @@ import connect from "@frontity/connect";
 import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
 import { Text } from "../constants/Text";
-import { Parameter } from '../constants/Parameter';
+import { Parameter, SocialContacts } from '../constants/Parameter';
 import { Link } from '../components'
-import { SocialContacts } from "../constants/Contact";
 
 const DesktopFooterComponent = ({ state }) => {
     return (

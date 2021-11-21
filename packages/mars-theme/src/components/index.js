@@ -1,11 +1,10 @@
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import List from "./components/PostList";
-import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
-import { Header, DesktopFooter, ScrollUp } from './components'
+import { Header, DesktopFooter, Post } from './components'
 import './style.css'
 
 /**

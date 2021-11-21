@@ -10,7 +10,7 @@ import Image from "@frontity/components/image";
  *
  * @returns A react component.
  */
-const FeaturedMediaComponent = ({ state, id }) => {
+const FeaturedMediaComponent = ({ state, id, height }) => {
   const media = state.source.attachment[id];
 
   if (!media) return null;
@@ -29,7 +29,7 @@ const FeaturedMediaComponent = ({ state, id }) => {
       ) || null;
 
   return (
-    <Container isAmp={state.frontity.mode === "amp"}>
+    <Container isAmp={state.frontity.mode === "amp"} height={height}>
       <StyledImage
         alt={media.title.rendered}
         src={media.source_url}
@@ -44,7 +44,7 @@ const FeaturedMediaComponent = ({ state, id }) => {
 export const FeaturedMedia = connect(FeaturedMediaComponent);
 
 const Container = styled.div`
-  height: 240px;
+  height: ${props => props.height || '240px'};
   ${({ isAmp }) => isAmp && "position: relative;"};
 `;
 

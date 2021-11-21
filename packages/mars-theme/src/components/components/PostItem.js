@@ -3,6 +3,7 @@ import { Link } from "./Link";
 import { FeaturedMedia, Tag } from ".";
 import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
+import { Tags } from "./Tags";
 
 /**
  * Item Component
@@ -33,9 +34,7 @@ const PostItemComponent = ({ state, item }) => {
                         <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
                     )}
                 </Link>
-                {allCategory && item.categories && item.categories.map((category, index) => (
-                    <Tag key={`tag-${item.article}-${index}`} category={category} />
-                ))}
+                <Tags item={item} />
             </Description>
         </PostItemContainer>
     );
@@ -68,13 +67,13 @@ const Title = styled.h1`
 `;
 
 const Description = styled.div`
-    min-height: 120px;
 `;
 
 const Excerpt = styled.div`
-    line-height: 22.4px;
+    font-size: 14px;
+    line-height: 22px;
     margin: 8px 0 12px 0;
-    color: rgba(12, 17, 43, 0.8);
+    color: ${Color.Black50};
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
