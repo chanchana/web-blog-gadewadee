@@ -1,6 +1,6 @@
 import { connect, styled } from "frontity";
 // import Item from "./list-item";
-import { PostItem } from "../components";
+import { PostItem, FeaturedCategories } from "../components";
 import { Pagination } from "./Pagination";
 import { TextField } from "./TextField";
 import { Text } from '../constants/Text';
@@ -41,6 +41,7 @@ const PostListComponent = ({ state, actions }) => {
             <div style={{display: 'flex'}}>
                 <Pagination />
             </div>
+            <FeaturedCategories />
         </Container>
     );
 };
