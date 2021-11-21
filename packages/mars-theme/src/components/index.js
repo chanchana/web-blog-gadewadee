@@ -5,7 +5,6 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import { Header, DesktopFooter, Post } from './components'
-import './style.css'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -68,6 +67,14 @@ const globalStyles = css`
   a:visited {
     color: inherit;
     text-decoration: none;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
   }
 `;
 
