@@ -19,7 +19,7 @@
   "dependencies": {
     "@frontity/core": "^1.14.3",
     "@frontity/html2react": "^1.7.0",
-    "@frontity/mars-theme": "./packages/mars-theme",
+    "@frontity/pordee-theme": "./packages/pordee-theme",
     "@frontity/tiny-router": "^1.4.4",
     "@frontity/wp-source": "^1.11.6",
     "frontity": "^1.17.1"
