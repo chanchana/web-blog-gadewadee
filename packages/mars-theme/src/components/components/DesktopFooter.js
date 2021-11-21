@@ -53,13 +53,14 @@ const FooterContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-    max-width: 1088px;
+    max-width: 1136px;
     width: 100%;
     padding: 24px;
     margin: auto;
     margin-top: 56px;
     display: grid;
     grid-template-columns: auto auto auto auto;
+    gap: 16px;
 `;
 
 const LargeItem = styled.div`

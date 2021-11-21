@@ -27,7 +27,7 @@ export const FeaturedCategories = connect(FeaturedCategoriesComponent);
 const Container = styled.div`
     padding: 64px 24px 88px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
 `;
 
@@ -37,6 +37,7 @@ const ItemContainer = styled.div`
 
 const Image = styled.img`
     height: 160px;
+    width: 100%;
     object-fit: cover;
 `;
 

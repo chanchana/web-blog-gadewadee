@@ -1,5 +1,4 @@
 import { connect, styled } from "frontity";
-// import Item from "./list-item";
 import { PostItem, FeaturedCategories } from "../components";
 import { Pagination } from "./Pagination";
 import { TextField } from "./TextField";
@@ -56,27 +55,14 @@ const SearchContainer = styled.div`
 `;
 
 const PostListContainer = styled.div`
-    width: 100%;
     max-width: 1136px;
     padding: 24px;
-    list-style: none;
     display: grid;
     grid-column-gap: 16px;
     grid-row-gap: 72px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
 `;
 
 const Container = styled.div`
     display: block;
-`;
-
-const PostItemContainer = styled.div`
-    display: inline-grid;
-    max-width: 352px;
-`;
-
-const Header = styled.h3`
-  font-weight: 300;
-  text-transform: capitalize;
-  // color: rgba(12, 17, 43, 0.9);
 `;

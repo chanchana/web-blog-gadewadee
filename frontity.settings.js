@@ -72,7 +72,7 @@ const settings = {
         "source": {
           "url": "https://testwpapigadewadee.wordpress.com/",
           "params": {
-            "per_page": 1
+            "per_page": 9
           }
         }
       }

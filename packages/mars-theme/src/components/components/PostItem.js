@@ -45,7 +45,7 @@ const PostItemComponent = ({ state, item }) => {
 export const PostItem = connect(PostItemComponent);
 
 const PostItemContainer = styled.div`
-    max-width: 352px;
+    max-width: 402px;
 `;
 
 const Title = styled.h1`
@@ -70,20 +70,6 @@ const Title = styled.h1`
 const Description = styled.div`
     min-height: 120px;
 `;
-
-// const AuthorName = styled.span`
-//     color: rgba(12, 17, 43, 0.9);
-//     font-size: 0.9em;
-// `;
-
-// const StyledLink = styled(Link)`
-//     padding: 15px 0;
-// `;
-
-// const PublishDate = styled.span`
-//     color: rgba(12, 17, 43, 0.9);
-//     font-size: 0.9em;
-// `;
 
 const Excerpt = styled.div`
     line-height: 22.4px;
