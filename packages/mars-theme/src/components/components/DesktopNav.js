@@ -8,17 +8,35 @@ import Arrow from '../public/icons/arrow.svg';
 import { Text } from '../constants/Text';
 import { Font } from '../constants/Font';
 import { Parameter } from '../constants/Parameter';
-
-const showCategoryCount = 5;
+import LogoIconSrc from '../public/logo-icon.svg';
+import SearchIconSrc from '../public/icons/search.svg';
+import { SearchBox } from './SearchBox';
 
 const DesktopNavComponent = ({ state }) => {
 
+    const [smallNavVisible, setSmallNavVisible] = useState(false);
+    const [searchVisible, setSearchVisible] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [categoryUrl, setCategoryUrl] = useState('/');
 
     useEffect(() => {
         setExpanded(false);
+        setSearchVisible(false);
     }, [state.router.link]);
+
+    const handleScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        if (currentScrollPos > 162) {
+            setSmallNavVisible(true);
+        } else {
+            setSmallNavVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const getCurrentUrl = () => decodeURI(state.router.link).split('page')[0]
 
@@ -35,16 +53,16 @@ const DesktopNavComponent = ({ state }) => {
     const isSelectedSubCategory = subCategories.map(s => s[1]).includes(currentCategoryUrl);
     const isPost = state.source.get(state.router.link).isPostType;
 
-    const NavItem = ({ label, selected }) => (
+    const NavItem = ({ label, selected, isMini }) => (
         <NavItemContainer>
-            <NavItemLabel selected={selected}>{label}</NavItemLabel>
+            <NavItemLabel selected={selected} isMini={isMini}>{label}</NavItemLabel>
             <NavItemHighlightImage src={HighlightBrushSrc} selected={selected} />
         </NavItemContainer>
     )
 
-    const ExpandableNavItem = ({ label, selected }) => (
+    const ExpandableNavItem = ({ label, selected, isMini }) => (
         <ExpandableNavItemContainer onClick={() => setExpanded(!expanded)}>
-            <NavItemLabel selected={selected}>{label}<ExpandableNavItemIcon src={Arrow} expanded={expanded}/></NavItemLabel>
+            <NavItemLabel selected={selected} isMini={isMini}>{label}<ExpandableNavItemIcon src={Arrow} expanded={expanded} /></NavItemLabel>
             <NavItemHighlightImage src={HighlightBrushSrc} selected={selected} />
         </ExpandableNavItemContainer>
     )
@@ -62,7 +80,7 @@ const DesktopNavComponent = ({ state }) => {
         </SubNavContainer>
     )
 
-    const  HeaderBanner = () => (
+    const HeaderBanner = () => (
         !isSelectedSubCategory && <HeaderImageContainer>
             <HeaderImage src={HeaderImageSrc} />
             <HeaderImageOverlay />
@@ -75,31 +93,73 @@ const DesktopNavComponent = ({ state }) => {
         </HeaderImageContainer>
     )
 
-    return (
-        <div>
-            <NavigationBar>
+    const MiniNavSide = ({ children, position }) => (
+        <MiniNavSideContainer>
+            {position === 'left' && <><GrowableSpacer />{children}<Spacer /></>}
+            {position === 'right' && <><Spacer />{children}<GrowableSpacer /></>}
+        </MiniNavSideContainer>
+    )
+
+    const MiniSearch = () => (
+        <>
+            {!searchVisible && <div style={{cursor: 'pointer'}} onClick={() => setSearchVisible(true)}>
+                <img src={SearchIconSrc} width="24px" height="24px" style={{marginTop: '8px'}} />
+            </div>}
+            {searchVisible && <SearchBox width="240px" closable={true} onClose={() => setSearchVisible(false)} />}
+        </>
+    )
+
+    const renderNavItems = (width, isMini) => {
+        const shouldExpand = 
+            !isPost ? expanded :
+            (isMini ? (smallNavVisible && expanded) : (!smallNavVisible && expanded));
+        return (
+            <Grid width={width}>
                 {state.theme.menu.slice(0, Parameter.MainCategoryCount).map(([name, link], index) => (
                     <Link link={link} key={`navbar-${index}`}>
-                        <NavItem label={name} selected={currentCategoryUrl === link}/>
+                        <NavItem label={name} selected={currentCategoryUrl === link} isMini={isMini} />
                     </Link>
                 ))}
-                <div style={{position: 'relative'}}>
-                    <ExpandableNavItem label={Text.CategoryEtc} selected={isSelectedSubCategory}/>
-                    <ExpandableList expanded={expanded}>
+                <div style={{ position: 'relative' }}>
+                    <ExpandableNavItem label={Text.CategoryEtc} selected={isSelectedSubCategory} isMini={isMini} />
+                    <ExpandableList expanded={shouldExpand}>
                         {subCategories.map(([name, link], index) => {
                             return (
                                 <Link link={link} key={`expandable-nav-${index}`}>
                                     {index !== 0 && <Divider />}
-                                    <ExpandableListItem expanded={expanded}>{name}</ExpandableListItem>
+                                    <ExpandableListItem expanded={shouldExpand}>{name}</ExpandableListItem>
                                 </Link>
                             )
                         })}
                     </ExpandableList>
                 </div>
+            </Grid>
+        )
+    };
+
+    return (
+        <div>
+            <NavigationBar>
+                {renderNavItems(undefined, false)}
             </NavigationBar>
             {!isPost && <>
                 <SubNav />
                 <HeaderBanner />
+            </>}
+            {isPost && <>
+                {smallNavVisible && 
+                    <MiniNavigationBar visible={smallNavVisible}>
+                        <MiniNavSide position="left">
+                            <Link link="/">
+                                <img src={LogoIconSrc} />
+                            </Link>
+                        </MiniNavSide>
+                        {renderNavItems('760px', true)}
+                        <MiniNavSide position="right">
+                            <MiniSearch />
+                        </MiniNavSide>
+                    </MiniNavigationBar>
+                }
             </>}
         </div>
     )
@@ -107,13 +167,45 @@ const DesktopNavComponent = ({ state }) => {
 
 export const DesktopNav = connect(DesktopNavComponent)
 
-const NavigationBar = styled.div`
+const Grid = styled.div`
     font-family: ${Font.IBMPlexSans};
     display: grid;
     grid-auto-flow: column;
+    column-gap: 32px;
+    width: ${props => props.width};
+    margin: auto;
+`;
+
+const NavigationBar = styled.div`
     width: fit-content;
     margin: auto;
-    column-gap: 32px;
+`;
+
+const MiniNavigationBar = styled.div`
+    transition: 0.5s ease-out;
+    height: 48px;
+    position: fixed;
+    top: ${props => props.visible ? '0' : '-48px'};
+    background: ${Color.White};
+    padding-top: 8px;
+    width: 100%;
+    display: flex;
+    z-index: 100;
+`;
+
+const MiniNavSideContainer = styled.div`
+    display: flex;
+    flex-grow: 1;
+    max-width: calc(100% - 1240px);
+`;
+
+const GrowableSpacer = styled.div`
+    flex-grow: 1;
+`;
+
+const Spacer = styled.div`
+    flex-grow: 1;
+    max-width: 150px;
 `;
 
 const NavItemContainer = styled.div`
@@ -126,7 +218,7 @@ const NavItemContainer = styled.div`
 const NavItemLabel = styled.div`
     padding: 10px 12px;
     line-height: 20px;
-    font-size: 18px;
+    font-size: ${props => props.isMini ? '14px' : '18px'};
     font-weight: ${props => props.selected && '600'};
 `;
 

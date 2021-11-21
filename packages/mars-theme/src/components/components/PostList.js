@@ -5,31 +5,15 @@ import { TextField } from "./TextField";
 import { Text } from '../constants/Text';
 import SearchIcon from '../public/icons/search.svg';
 import { useMemo } from 'react';
+import { SearchBox } from "./SearchBox";
 
 const PostListComponent = ({ state, actions }) => {
     const data = state.source.get(state.router.link);
 
-    const handleSearch = (value) => {
-        if (value) {
-            actions.router.set(`/?s=${value}`);
-        } else {
-            actions.router.set('/');
-        }
-    }
-
-    const defaultSearchKeyword = useMemo(() => {
-        const url = decodeURI(state.router.link);
-        const searchParams = url.split('/?s=');
-        if (searchParams.length > 1) {
-            return searchParams[1];
-        }
-        return undefined;
-    }, [state.router.link])
-
     return (
         <Container>
             <SearchContainer>
-                <TextField defaultValue={defaultSearchKeyword} placeholder={Text.PlaceholderSearch} center={true} icon={SearchIcon} width="306px" onSubmit={handleSearch} />
+                <SearchBox width="306px" center={true} />
             </SearchContainer>
             <PostListContainer>
                 {data.items.map(({ type, id }, index) => {
