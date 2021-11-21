@@ -11,7 +11,11 @@ const PostListComponent = ({ state, actions }) => {
     const data = state.source.get(state.router.link);
 
     const handleSearch = (value) => {
-        actions.router.set(`/?s=${value}`);
+        if (value) {
+            actions.router.set(`/?s=${value}`);
+        } else {
+            actions.router.set('/');
+        }
     }
 
     const defaultSearchKeyword = useMemo(() => {

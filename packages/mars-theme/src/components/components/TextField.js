@@ -11,9 +11,7 @@ export const TextField = ({ defaultValue, icon, placeholder, center, width, onSu
     }
 
     const handleSubmit = (event) => {
-        if (value) {
-            onSubmit(value);
-        }
+        onSubmit(value);
         event.preventDefault();
     }
 

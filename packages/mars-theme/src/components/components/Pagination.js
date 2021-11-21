@@ -16,29 +16,25 @@ const PaginationComponent = ({ state, actions }) => {
 
     return (
         <PaginationContainer>
-            {/* {previous && ( */}
-                <Link link={previous} disabled={!previous}>
-                    <Button disabled={!previous}>
-                        <ButtonIcon src={ArrowLeftIcon} />
-                    </Button>
-                </Link>
-            {/* )} */}
-            <Text>หน้าที่ {page} จาก {totalPages}</Text>
-            {/* {next && ( */}
-                <Link link={next} disabled={!next}>
-                    <Button disabled={!next}>
-                        <ButtonIcon src={ArrowRightIcon} />
-                    </Button>
-                </Link>
-            {/* )} */}
+            {(previous || next) &&
+                <>
+                    <Link link={previous} disabled={!previous}>
+                        <Button disabled={!previous}>
+                            <ButtonIcon src={ArrowLeftIcon} />
+                        </Button>
+                    </Link>
+                    <Text>หน้าที่ {page} จาก {totalPages}</Text>
+                    <Link link={next} disabled={!next}>
+                        <Button disabled={!next}>
+                            <ButtonIcon src={ArrowRightIcon} />
+                        </Button>
+                    </Link>
+                </>
+            }
         </PaginationContainer>
     );
 };
 
-/**
- * Connect Pagination to global context to give it access to
- * `state`, `actions`, `libraries` via props
- */
 export const Pagination = connect(PaginationComponent);
 
 const PaginationContainer = styled.div`
