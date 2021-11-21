@@ -44,6 +44,7 @@ export const Pagination = connect(PaginationComponent);
 const PaginationContainer = styled.div`
     font-family: ${Font.IBMPlexSans};
     display: flex;
+    margin: auto;
 `;
 
 const Button = styled.div`

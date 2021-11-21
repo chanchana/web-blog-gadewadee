@@ -7,6 +7,7 @@ import HeaderImageSrc from '../public/images/header_image.png';
 import Arrow from '../public/icons/arrow.svg';
 import { Text } from '../constants/Text';
 import { Font } from '../constants/Font';
+import { Parameter } from '../constants/Parameter';
 
 const showCategoryCount = 5;
 
@@ -30,7 +31,7 @@ const DesktopNavComponent = ({ state }) => {
         return categoryUrl;
     }, [state.router.link]);
 
-    const subCategories = state.theme.menu.slice(showCategoryCount);
+    const subCategories = state.theme.menu.slice(Parameter.MainCategoryCount);
     const isSelectedSubCategory = subCategories.map(s => s[1]).includes(currentCategoryUrl);
     const isPost = state.source.get(state.router.link).isPostType;
 
@@ -77,8 +78,8 @@ const DesktopNavComponent = ({ state }) => {
     return (
         <div>
             <NavigationBar>
-                {state.theme.menu.slice(0, showCategoryCount).map(([name, link], index) => (
-                    <Link link={link}>
+                {state.theme.menu.slice(0, Parameter.MainCategoryCount).map(([name, link], index) => (
+                    <Link link={link} key={`navbar-${index}`}>
                         <NavItem label={name} selected={currentCategoryUrl === link}/>
                     </Link>
                 ))}
@@ -87,7 +88,7 @@ const DesktopNavComponent = ({ state }) => {
                     <ExpandableList expanded={expanded}>
                         {subCategories.map(([name, link], index) => {
                             return (
-                                <Link link={link}>
+                                <Link link={link} key={`expandable-nav-${index}`}>
                                     {index !== 0 && <Divider />}
                                     <ExpandableListItem expanded={expanded}>{name}</ExpandableListItem>
                                 </Link>
