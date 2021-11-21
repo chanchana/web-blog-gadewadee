@@ -5,7 +5,7 @@ import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
-import { Header, DesktopFooter } from './components'
+import { Header, DesktopFooter, ScrollUp } from './components'
 import './style.css'
 
 /**

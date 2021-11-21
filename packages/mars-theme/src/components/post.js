@@ -3,7 +3,7 @@ import { connect, styled } from "frontity";
 import { Link } from "./components";
 import List from "./list";
 import FeaturedMedia from "./featured-media";
-
+import { ScrollUp } from "./components";
 /**
  * The Post component that Mars uses to render any kind of "post type", like
  * posts, pages, attachments, etc.
@@ -87,6 +87,7 @@ const Post = ({ state, actions, libraries }) => {
           <Html2React html={post.content.rendered} />
         </Content>
       )}
+      <ScrollUp />
     </Container>
   ) : null;
 };
