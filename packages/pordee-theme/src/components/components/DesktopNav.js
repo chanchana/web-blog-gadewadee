@@ -52,6 +52,7 @@ const DesktopNavComponent = ({ state }) => {
     const subCategories = state.theme.menu.slice(Parameter.MainCategoryCount);
     const isSelectedSubCategory = subCategories.map(s => s[1]).includes(currentCategoryUrl);
     const isPost = state.source.get(state.router.link).isPostType;
+    const isError = state.source.get(state.router.link).isError;
 
     const NavItem = ({ label, selected, isMini }) => (
         <NavItemContainer>
@@ -142,7 +143,7 @@ const DesktopNavComponent = ({ state }) => {
             <NavigationBar>
                 {renderNavItems(undefined, false)}
             </NavigationBar>
-            {!isPost && <>
+            {!isError && !isPost && <>
                 <SubNav />
                 <HeaderBanner />
             </>}
