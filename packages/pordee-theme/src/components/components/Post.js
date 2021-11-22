@@ -5,8 +5,12 @@ import { Tags } from "./Tags";
 import { Months, ShareLinks } from "../constants/Parameter";
 import { Color } from "../constants/Color";
 import { Text } from "../constants/Text";
+import { useState, useEffect } from 'react';
+import { getRelatedPosts } from "../utils/RelatedPost";
+import { PostList } from './PostList';
 
 const PostComponent = ({ state, actions, libraries }) => {
+    const [relatedPosts, setRelatedPosts] = useState(null)
     // Get information about the current URL.
     const data = state.source.get(state.router.link);
     // Get the data of the post.
@@ -19,6 +23,16 @@ const PostComponent = ({ state, actions, libraries }) => {
     // Get the html2react component.
     const Html2React = libraries.html2react.Component;
 
+    useEffect(() => {
+        if (state && post && data.isReady) {
+            getRelatedPosts(state, actions, post).then(posts => {
+                if (posts.length > 0) {
+                    setRelatedPosts(posts);
+                }
+            });
+        }
+    }, [state, post, data.isReady]);
+
     /**
      * Once the post has loaded in the DOM, prefetch both the
      * home posts and the list component so if the user visits
@@ -28,27 +42,38 @@ const PostComponent = ({ state, actions, libraries }) => {
     // Load the post, but only if the data is ready.
     return data.isReady && (
         <Container>
-            <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-            <TagsContainer><Tags item={post} /></TagsContainer>
-            <DateAuthor>
-                {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
-            </DateAuthor>
+            <PostContainer>
+                <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                <TagsContainer><Tags item={post} /></TagsContainer>
+                <DateAuthor>
+                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
+                </DateAuthor>
 
-            <FeaturedMedia id={post.featured_media} height="320px" />
+                <FeaturedMedia id={post.featured_media} height="320px" />
 
-            {data.isAttachment ? (
-                <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
-            ) : (
-                <Content>
-                    <Html2React html={post.content.rendered} />
-                </Content>
-            )}
-            <ShareContainer>
-                <div>{Text.Share}</div>
-                {ShareLinks.map(({label, icon, link}, index) => (
-                    <ShareIcon key={`share-link-${label}`} src={icon} />
-                ))}
-            </ShareContainer>
+                {data.isAttachment ? (
+                    <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
+                ) : (
+                    <Content>
+                        <Html2React html={post.content.rendered} />
+                    </Content>
+                )}
+                <ShareContainer>
+                    <div>{Text.Share}</div>
+                    {ShareLinks.map(({label, icon, link}, index) => (
+                        <ShareIcon key={`share-link-${label}`} src={icon} />
+                    ))}
+                </ShareContainer>
+            </PostContainer>
+            {relatedPosts && 
+                <RelatedContainer>
+                    <div style={{padding: '0 24px'}}>
+                        <Divider />
+                    </div>
+                    <RelatedText>{Text.PostRelated}</RelatedText>
+                    <PostList posts={relatedPosts} />
+                </RelatedContainer>
+            }
             <ScrollUp />
         </Container>
     );
@@ -56,15 +81,19 @@ const PostComponent = ({ state, actions, libraries }) => {
 
 export const Post = connect(PostComponent);
 
+const Container = styled.div`
+`;
+
 const DateAuthor = styled.div`
     font-family: ${Font.IBMPlexSans};
     line-height: 16px;
     margin-bottom: 8px;
 `;
-const Container = styled.div`
+const PostContainer = styled.div`
     width: 720px;
     margin: 0;
     padding: 56px 24px 8px;
+    margin: auto;
 `;
 
 const TagsContainer = styled.div`
@@ -104,6 +133,29 @@ const ShareIcon = styled.img`
     height: 24px;
     cursor: pointer;
 `
+
+const RelatedContainer = styled.div`
+    width: 100%;
+    max-width: 1184px;
+    margin-bottom: 28px;
+`;
+
+const RelatedText = styled.dev`
+    font-family: ${Font.IBMPlexSans};
+    display: flex;
+    font-size: 24px;
+    line-height: 110%;
+    width: 100%;
+    margin: 32px 0 8px;
+    font-weight: 600;
+    justify-content: center;
+`;
+
+const Divider = styled.div`
+    height: 1px;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+`;
 
 const Content = styled.div`
     word-break: break-word;

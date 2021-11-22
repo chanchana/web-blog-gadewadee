@@ -12,4 +12,6 @@ export const Text = {
     PlaceholderSearch: 'ค้นหาจากคีย์เวิร์ด',
 
     Share: 'ส่งต่อให้คนรอบตัว',
+
+    PostRelated: 'ลองอ่านบทความเหล่านี้ต่อมั้ย :)',
 }
