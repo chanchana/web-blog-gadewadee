@@ -1,4 +1,5 @@
 import { connect, styled } from "frontity";
+import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
 import { Link } from './Link';
 
@@ -29,6 +30,7 @@ const TagContainer = styled.div`
     font-family: ${Font.IBMPlexSans};
     font-size: 12px;
     line-height: 20px;
+    color: ${Color.Black};
 
     &:hover {
         color: white;
