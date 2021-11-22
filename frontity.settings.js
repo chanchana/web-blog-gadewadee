@@ -3,8 +3,8 @@ const settings = {
   "state": {
     "frontity": {
       "url": "https://test.frontity.org",
-      "title": "Test Frontity Blog",
-      "description": "WordPress installation for Frontity development"
+      "title": "พอดีต่อใจ",
+      "description": "แหล่งรวมความรู้การตลาดและการจัดการดี ๆ ให้คนคิดดีมาเรียนรู้จากกัน"
     }
   },
   "packages": [
@@ -54,10 +54,6 @@ const settings = {
               "อื่น ๆ",
               "/category/อื่น ๆ/"
             ],
-            // [
-            //   "About Us",
-            //   "/about-us/"
-            // ]
           ],
           "featured": {
             "showOnList": true,
