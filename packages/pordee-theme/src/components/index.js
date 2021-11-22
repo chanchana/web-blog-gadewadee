@@ -39,8 +39,7 @@ const Theme = ({ state }) => {
       on the type of URL we are in. */}
       <Main>
         <Switch>
-          {/* <Loading when={data.isFetching} /> */}
-          <Loading when={data.isArchive} />
+          <Loading when={data.isFetching} />
           <Posts when={data.isArchive} />
           <Post when={data.isPostType} />
           <PageError when={data.isError} />
