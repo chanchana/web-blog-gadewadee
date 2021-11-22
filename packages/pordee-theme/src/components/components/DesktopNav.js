@@ -94,19 +94,16 @@ const DesktopNavComponent = ({ state }) => {
         </HeaderImageContainer>
     )
 
-    const MiniNavSide = ({ children, position }) => (
-        <MiniNavSideContainer>
-            {position === 'left' && <><GrowableSpacer />{children}<Spacer /></>}
-            {position === 'right' && <><Spacer />{children}<GrowableSpacer /></>}
-        </MiniNavSideContainer>
-    )
-
     const MiniSearch = () => (
         <>
-            {!searchVisible && <div style={{cursor: 'pointer'}} onClick={() => setSearchVisible(true)}>
+            <div style={{cursor: 'pointer'}} onClick={() => setSearchVisible(true)}>
                 <img src={SearchIconSrc} width="24px" height="24px" style={{marginTop: '8px'}} />
-            </div>}
-            {searchVisible && <SearchBox width="240px" closable={true} onClose={() => setSearchVisible(false)} />}
+            </div>
+            {searchVisible &&
+                <MiniSearchBoxContainer>
+                    <SearchBox placeholder={Text.PlaceholderMiniSearch} width="104px" closable={true} onClose={() => setSearchVisible(false)} />
+                </MiniSearchBoxContainer>
+            }
         </>
     )
 
@@ -151,15 +148,11 @@ const DesktopNavComponent = ({ state }) => {
                 {smallNavVisible && 
                     <MiniNavigationBarContainer>
                         <MiniNavigationBar visible={smallNavVisible}>
-                            {/* <MiniNavSide position="left"> */}
-                                <Link link="/">
-                                    <img src={LogoIconSrc} />
-                                </Link>
-                            {/* </MiniNavSide> */}
+                            <Link link="/">
+                                <img src={LogoIconSrc} />
+                            </Link>
                             {renderNavItems('760px', true)}
-                            {/* <MiniNavSide position="right"> */}
-                                <MiniSearch />
-                            {/* </MiniNavSide> */}
+                            <MiniSearch />
                         </MiniNavigationBar>
                     </MiniNavigationBarContainer>
                 }
@@ -203,13 +196,15 @@ const MiniNavigationBar = styled.div`
     width: 100%;
     max-width: 1136px;
     margin: auto;
+    position: relative;
 `;
 
-const MiniNavSideContainer = styled.div`
-    display: flex;
-    flex-grow: 1;
-    max-width: calc(100% - 1240px);
-`;
+const MiniSearchBoxContainer = styled.div`
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    background: ${Color.White};
+`
 
 const GrowableSpacer = styled.div`
     flex-grow: 1;

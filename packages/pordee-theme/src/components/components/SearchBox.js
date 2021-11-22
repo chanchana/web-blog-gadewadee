@@ -5,7 +5,7 @@ import SearchIcon from '../public/icons/search.svg';
 import { useMemo } from 'react';
 import TimesIconSrc from '../public/icons/times.svg'
 
-const SearchBoxComponent = ({ state, actions, center, width, closable, onClose }) => {
+const SearchBoxComponent = ({ state, actions, center, width, closable, onClose, placeholder }) => {
     const handleSearch = (value) => {
         if (value) {
             actions.router.set(`/?s=${value}`);
@@ -25,7 +25,7 @@ const SearchBoxComponent = ({ state, actions, center, width, closable, onClose }
 
     return (
         <Container width={width}>
-            <TextField defaultValue={defaultSearchKeyword} placeholder={Text.PlaceholderSearch} center={center} icon={SearchIcon} onSubmit={handleSearch} />
+            <TextField defaultValue={defaultSearchKeyword} placeholder={placeholder || Text.PlaceholderSearch} center={center} icon={SearchIcon} onSubmit={handleSearch} />
             {closable && <Icon onClick={onClose} src={TimesIconSrc} />}
         </Container>
     )
