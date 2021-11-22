@@ -3,6 +3,7 @@ import Switch from "@frontity/components/switch";
 import Posts from "./components/Posts";
 import Title from "./title";
 import { Header, DesktopFooter, Post, PageError, Loading } from './components'
+import IconLogoSrc from './public/logo-icon.svg'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -60,6 +61,7 @@ const globalStyles = css`
     font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #FFFFFF;
+    cursor: url(${IconLogoSrc}), auto;
   }
   a,
   a:visited {
