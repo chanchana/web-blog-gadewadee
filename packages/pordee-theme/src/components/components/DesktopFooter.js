@@ -52,8 +52,8 @@ const FooterContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-    max-width: 1136px;
     width: 100%;
+    max-width: 1136px;
     padding: 24px;
     margin: auto;
     margin-top: 56px;

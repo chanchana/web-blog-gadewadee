@@ -29,6 +29,7 @@ const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
+    max-width: 1136px;
 `;
 
 const ItemContainer = styled.div`

@@ -91,7 +91,6 @@ const DateAuthor = styled.div`
 `;
 const PostContainer = styled.div`
     width: 720px;
-    margin: 0;
     padding: 56px 24px 8px;
     margin: auto;
 `;
