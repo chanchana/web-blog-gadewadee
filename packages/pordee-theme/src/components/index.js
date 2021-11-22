@@ -1,9 +1,8 @@
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Posts from "./components/Posts";
-import Loading from "./loading";
 import Title from "./title";
-import { Header, DesktopFooter, Post, PageError } from './components'
+import { Header, DesktopFooter, Post, PageError, Loading } from './components'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -40,7 +39,8 @@ const Theme = ({ state }) => {
       on the type of URL we are in. */}
       <Main>
         <Switch>
-          <Loading when={data.isFetching} />
+          {/* <Loading when={data.isFetching} /> */}
+          <Loading when={data.isArchive} />
           <Posts when={data.isArchive} />
           <Post when={data.isPostType} />
           <PageError when={data.isError} />
