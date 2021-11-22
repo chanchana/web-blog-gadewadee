@@ -46,7 +46,7 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
     width: 100%;
-    max-width: 1210px;
+    max-width: 1186px;
     margin: auto;
     text-align: right;
 `;

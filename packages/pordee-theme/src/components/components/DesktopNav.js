@@ -148,17 +148,19 @@ const DesktopNavComponent = ({ state }) => {
             </>}
             {isPost && <>
                 {smallNavVisible && 
-                    <MiniNavigationBar visible={smallNavVisible}>
-                        <MiniNavSide position="left">
-                            <Link link="/">
-                                <img src={LogoIconSrc} />
-                            </Link>
-                        </MiniNavSide>
-                        {renderNavItems('760px', true)}
-                        <MiniNavSide position="right">
-                            <MiniSearch />
-                        </MiniNavSide>
-                    </MiniNavigationBar>
+                    <MiniNavigationBarContainer>
+                        <MiniNavigationBar visible={smallNavVisible}>
+                            {/* <MiniNavSide position="left"> */}
+                                <Link link="/">
+                                    <img src={LogoIconSrc} />
+                                </Link>
+                            {/* </MiniNavSide> */}
+                            {renderNavItems('760px', true)}
+                            {/* <MiniNavSide position="right"> */}
+                                <MiniSearch />
+                            {/* </MiniNavSide> */}
+                        </MiniNavigationBar>
+                    </MiniNavigationBarContainer>
                 }
             </>}
         </div>
@@ -181,16 +183,25 @@ const NavigationBar = styled.div`
     margin: auto;
 `;
 
+const MiniNavigationBarContainer = styled.div`
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+`;
+
 const MiniNavigationBar = styled.div`
     transition: 0.5s ease-out;
     height: 48px;
-    position: fixed;
     top: ${props => props.visible ? '0' : '-48px'};
     background: ${Color.White};
-    padding-top: 8px;
-    width: 100%;
+    padding: 8px 24px 0;
     display: flex;
     z-index: 100;
+    width: 100%;
+    max-width: 1136px;
+    margin: auto;
 `;
 
 const MiniNavSideContainer = styled.div`
