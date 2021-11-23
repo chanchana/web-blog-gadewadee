@@ -25,9 +25,9 @@ const PostListComponent = ({ state, actions }) => {
             </SearchContainer>
             <PostList posts={posts} />
             {posts.length === 0 && notFound}
-            <Flex>
+            <PaginationContainer>
                 <Pagination />
-            </Flex>
+            </PaginationContainer>
             <FeaturedCategories />
         </Container>
     );
@@ -54,4 +54,9 @@ const NotFound = styled.div`
 
 const Container = styled.div`
     display: block;
+`;
+
+const PaginationContainer = styled.div`
+    display: flex;
+    margin-top: 36px;
 `;
