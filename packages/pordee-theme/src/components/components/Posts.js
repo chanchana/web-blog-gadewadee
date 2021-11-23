@@ -1,16 +1,22 @@
 import { connect, styled } from "frontity";
-import { PostItem, FeaturedCategories } from ".";
+import { FeaturedCategories, Flex } from ".";
 import { Pagination } from "./Pagination";
-import { TextField } from "./TextField";
-import { Text } from '../constants/Text';
-import SearchIcon from '../public/icons/search.svg';
-import { useMemo } from 'react';
 import { SearchBox } from "./SearchBox";
 import { PostList } from './PostList';
+import { Font } from "../constants/Font";
+import { GoHomeButton } from "./GoHomeButton";
+import { Text } from "../constants/Text";
 
 const PostListComponent = ({ state, actions }) => {
     const data = state.source.get(state.router.link);
     const posts = data.items.map(({ type, id }) => state.source[type][id]);
+
+    const notFound = (
+        <NotFound>
+            <div style={{marginBottom: '16px'}}>{Text.ErrorSearchNotFound}</div>
+            <GoHomeButton />
+        </NotFound>
+    )
 
     return (
         <Container>
@@ -18,9 +24,10 @@ const PostListComponent = ({ state, actions }) => {
                 <SearchBox width="306px" center={true} />
             </SearchContainer>
             <PostList posts={posts} />
-            <div style={{display: 'flex'}}>
+            {posts.length === 0 && notFound}
+            <Flex>
                 <Pagination />
-            </div>
+            </Flex>
             <FeaturedCategories />
         </Container>
     );
@@ -35,13 +42,14 @@ const SearchContainer = styled.div`
     display: flex;
 `;
 
-const PostListContainer = styled.div`
-    max-width: 1136px;
-    padding: 24px;
-    display: grid;
-    grid-column-gap: 16px;
-    grid-row-gap: 56px;
-    grid-template-columns: 1fr 1fr 1fr;
+const NotFound = styled.div`
+    font-family: ${Font.IBMPlexSans};
+    font-size: 24px;
+    line-height: 40px;
+    height: 54px;
+    text-align: center;
+    padding: 32px 24px 96px;
+    font-weight: 600;
 `;
 
 const Container = styled.div`

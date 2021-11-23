@@ -18,6 +18,7 @@ export const Text = {
 
     ErrorHeading: 'ไม่สามารถเข้าถึงหน้าที่ต้องการได้ :(',
     ErrorSubHeading: 'เกิดข้อผิดพลาดเล็กน้อย เรากำลังหาทางแก้ไขนะ!',
+    ErrorSearchNotFound: 'ไม่พบบทความที่คุณค้นหา :(',
 
     ButtonGoHome: 'กลับหน้าหลัก',
 }
