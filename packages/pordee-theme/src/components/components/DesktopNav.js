@@ -254,8 +254,7 @@ const ExpandableNavItemIcon = styled.img`
     width: 20px;
     height: 20px;
     transition: 0.3s;
-    transform: rotate(0deg);
-    transform: ${props => props.expanded ? 'rotate(180deg)' : ''};
+    transform: ${props => props.expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
 `;
 
 const ExpandableList = styled.div`

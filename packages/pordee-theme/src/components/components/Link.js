@@ -8,7 +8,6 @@ const LinkComponent = ({ children, ...props }) => {
         if (props.disabled) {
             return
         }
-        event.stopPropagation();
         if (state.theme.isMobileMenuOpen) {
             actions.theme.closeMobileMenu();
         }

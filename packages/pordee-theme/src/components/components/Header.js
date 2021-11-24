@@ -2,6 +2,7 @@ import { connect, styled } from "frontity";
 import { DesktopNav, Link } from ".";
 import { useResponsive } from "../hooks/useResponsive";
 import Logo from '../public/logo.svg'
+import { MobileNav } from "./MobileNav";
 // import Nav from "./nav";
 // import MobileMenu from "./menu";
 
@@ -23,6 +24,7 @@ const HeaderComponent = ({ state }) => {
     return (
         <>
             <Container>
+                { isMobileOrTablet && <MobileNav /> }
                 { isDesktop && desktopHeader }
             </Container>
         </>

@@ -1,6 +1,7 @@
 import { connect, styled } from "frontity";
 import { PostItem } from "../components";
 import { useResponsive } from "../hooks/useResponsive";
+import { mobileMediaQuery, tabletMediaQuery } from "../utils/MediaQuery";
 
 const PostListComponent = ({ posts }) => {
     const responsive = useResponsive();
@@ -17,10 +18,20 @@ export const PostList = connect(PostListComponent);
 
 const PostListContainer = styled.div`
     max-width: 1136px;
-    padding: ${props => props.isMobile ? '16px' : '24px'};
+    padding: 24px;
     display: grid;
     grid-column-gap: 16px;
-    grid-row-gap: ${props => props.isMobile ? '20px' : '56px'};
-    grid-template-columns: ${props => props.isMobile ? '1fr' : props.isTablet ? '1fr 1fr' : '1fr 1fr 1fr'};
+    grid-row-gap: 56px;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: auto;
+
+    ${mobileMediaQuery} {
+        padding: 16px;
+        grid-row-gap: 20px;
+        grid-template-columns: 1fr;
+    }
+
+    ${tabletMediaQuery} {
+        grid-template-columns: 1fr 1fr;
+    }
 `;
