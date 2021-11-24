@@ -6,10 +6,13 @@ import { PostList } from './PostList';
 import { Font } from "../constants/Font";
 import { GoHomeButton } from "./GoHomeButton";
 import { Text } from "../constants/Text";
+import { IsDesktop } from "./Responsive";
+import { useResponsive } from "../hooks/useResponsive";
 
 const PostListComponent = ({ state, actions }) => {
     const data = state.source.get(state.router.link);
     const posts = data.items.map(({ type, id }) => state.source[type][id]);
+    const { isDesktop } = useResponsive();
 
     const notFound = (
         <NotFound>
@@ -20,9 +23,11 @@ const PostListComponent = ({ state, actions }) => {
 
     return (
         <Container>
-            <SearchContainer>
-                <SearchBox state={state} actions={actions} width="306px" center={true} />
-            </SearchContainer>
+            {isDesktop && (
+                <SearchContainer>
+                    <SearchBox state={state} actions={actions} width="306px" center={true} />
+                </SearchContainer>
+            )}
             <PostList posts={posts} />
             {posts.length === 0 && notFound}
             <PaginationContainer>
@@ -58,5 +63,4 @@ const Container = styled.div`
 
 const PaginationContainer = styled.div`
     display: flex;
-    margin-top: 36px;
 `;

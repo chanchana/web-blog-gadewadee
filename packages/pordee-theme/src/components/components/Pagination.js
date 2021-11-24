@@ -14,25 +14,21 @@ const PaginationComponent = ({ state, actions }) => {
         if (next) actions.source.fetch(next);
     }, []);
 
-    return (
-        <PaginationContainer>
-            {(previous || next) &&
-                <>
-                    <Link link={previous} disabled={!previous}>
-                        <Button disabled={!previous}>
-                            <ButtonIcon src={ArrowLeftIcon} />
-                        </Button>
-                    </Link>
-                    <Text>หน้าที่ {page} จาก {totalPages}</Text>
-                    <Link link={next} disabled={!next}>
-                        <Button disabled={!next}>
-                            <ButtonIcon src={ArrowRightIcon} />
-                        </Button>
-                    </Link>
-                </>
-            }
-        </PaginationContainer>
-    );
+    return (<>
+        {(previous || next) && <PaginationContainer>
+            <Link link={previous} disabled={!previous}>
+                <Button disabled={!previous}>
+                    <ButtonIcon src={ArrowLeftIcon} />
+                </Button>
+            </Link>
+            <Text>หน้าที่ {page} จาก {totalPages}</Text>
+            <Link link={next} disabled={!next}>
+                <Button disabled={!next}>
+                    <ButtonIcon src={ArrowRightIcon} />
+                </Button>
+            </Link>
+        </PaginationContainer>}
+    </>);
 };
 
 export const Pagination = connect(PaginationComponent);
@@ -41,6 +37,7 @@ const PaginationContainer = styled.div`
     font-family: ${Font.IBMPlexSans};
     display: flex;
     margin: auto;
+    margin-top: 36px;
 `;
 
 const Button = styled.div`
