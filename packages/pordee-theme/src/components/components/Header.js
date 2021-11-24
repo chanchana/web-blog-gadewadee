@@ -1,27 +1,30 @@
 import { connect, styled } from "frontity";
 import { DesktopNav, Link } from ".";
+import { useResponsive } from "../hooks/useResponsive";
 import Logo from '../public/logo.svg'
 // import Nav from "./nav";
 // import MobileMenu from "./menu";
 
 const HeaderComponent = ({ state }) => {
+    const { isMobileOrTablet, isDesktop } = useResponsive();
+
+    const desktopHeader = (
+        <>
+            <Link link="/">
+                <LogoContainer>
+                    <LogoImage src={Logo} />
+                </LogoContainer>
+            </Link>
+            <Description>{state.frontity.description}</Description>
+            <DesktopNavContainer>
+                <DesktopNav />
+            </DesktopNavContainer>
+        </>
+    )
     return (
         <>
             <Container>
-                <Link link="/">
-                    <LogoContainer>
-                        <LogoImage src={Logo} />
-                    </LogoContainer>
-                </Link>
-                {/* <StyledLink link="/">
-                    <Title>{state.frontity.title}</Title>
-                </StyledLink> */}
-                <Description>{state.frontity.description}</Description>
-                {/* <MobileMenu /> */}
-                {/* <Nav /> */}
-                <DesktopNavContainer>
-                    <DesktopNav />
-                </DesktopNavContainer>
+                { isDesktop && desktopHeader }
             </Container>
         </>
     );

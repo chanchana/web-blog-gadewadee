@@ -8,6 +8,7 @@ import { Text } from "../constants/Text";
 import { useState, useEffect } from 'react';
 import { getRelatedPosts } from "../utils/RelatedPost";
 import { PostList } from './PostList';
+import { useResponsive } from "../hooks/useResponsive";
 
 const PostComponent = ({ state, actions, libraries }) => {
     const [relatedPosts, setRelatedPosts] = useState(null)
@@ -22,16 +23,18 @@ const PostComponent = ({ state, actions, libraries }) => {
 
     // Get the html2react component.
     const Html2React = libraries.html2react.Component;
+    const { isMobile, isTablet, isDesktop } = useResponsive();
 
     useEffect(() => {
         if (state && post && data.isReady) {
-            getRelatedPosts(state, actions, post).then(posts => {
+            const numberOfRelatedPosts = isTablet ? 4 : 3;
+            getRelatedPosts(state, actions, post, numberOfRelatedPosts).then(posts => {
                 if (posts.length > 0) {
                     setRelatedPosts(posts);
                 }
             });
         }
-    }, [state, post, data.isReady]);
+    }, [state, post, data.isReady, isTablet]);
 
     /**
      * Once the post has loaded in the DOM, prefetch both the
@@ -46,7 +49,7 @@ const PostComponent = ({ state, actions, libraries }) => {
                 <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                 <TagsContainer><Tags item={post} /></TagsContainer>
                 <DateAuthor>
-                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
+                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name} | {isMobile.toString()} {isTablet.toString()} {isDesktop.toString()}
                 </DateAuthor>
 
                 <FeaturedMedia id={post.featured_media} height="320px" />
@@ -90,7 +93,7 @@ const DateAuthor = styled.div`
     margin-bottom: 8px;
 `;
 const PostContainer = styled.div`
-    width: 720px;
+    max-width: 720px;
     padding: 56px 24px 8px;
     margin: auto;
 `;
@@ -111,7 +114,7 @@ const Title = styled.h1`
     line-height: 38px;
     font-weight: 600;
     text-align: center;
-    width: 526px;
+    max-width: 526px;
     margin: auto;
 `;
 

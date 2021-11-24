@@ -6,10 +6,12 @@ import { Text } from '../constants/Text';
 import SearchIcon from '../public/icons/search.svg';
 import { useMemo } from 'react';
 import { SearchBox } from "./SearchBox";
+import { useResponsive } from "../hooks/useResponsive";
 
 const PostListComponent = ({ posts }) => {
+    const responsive = useResponsive();
     return (
-        <PostListContainer>
+        <PostListContainer {...responsive}>
             {posts.map((post, index) => (
                 <PostItem key={`post-${index}-${post.id}`} item={post} />
             ))}
@@ -25,6 +27,6 @@ const PostListContainer = styled.div`
     display: grid;
     grid-column-gap: 16px;
     grid-row-gap: 56px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: ${props => props.isMobile ? '1fr' : props.isTablet ? '1fr 1fr' : '1fr 1fr 1fr'};
     margin: auto;
 `;

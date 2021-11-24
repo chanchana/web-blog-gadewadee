@@ -2,7 +2,7 @@ import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Posts from "./components/Posts";
 import Title from "./title";
-import { Header, DesktopFooter, Post, PageError, Loading } from './components'
+import { Header, Post, PageError, Loading, Footer } from './components'
 import IconLogoSrc from './public/logo-icon.svg'
 
 /**
@@ -47,7 +47,7 @@ const Theme = ({ state }) => {
         </Switch>
       </Main>
 
-      <DesktopFooter />
+      <Footer />
     </>
   );
 };
