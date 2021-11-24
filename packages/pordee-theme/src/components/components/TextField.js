@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 
-export const TextField = ({ defaultValue, icon, placeholder, center, width, onSubmit }) => {
+export const TextField = forwardRef(({ defaultValue, icon, placeholder, center, width, onSubmit}, ref) => {
     const [value, setValue] = useState(defaultValue || undefined);
 
     const handleChange = (event) => {
@@ -18,10 +18,10 @@ export const TextField = ({ defaultValue, icon, placeholder, center, width, onSu
     return (
         <Form width={width} onSubmit={handleSubmit}>
             <Icon src={icon}/>
-            <Input placeholder={placeholder} center={center} value={value} onChange={handleChange} />
+            <Input placeholder={placeholder} center={center} value={value} onChange={handleChange} ref={ref} />
         </Form>
     );
-}
+});
 
 const Input = styled.input`
     height: 24px;

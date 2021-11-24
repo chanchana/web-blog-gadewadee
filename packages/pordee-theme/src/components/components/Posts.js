@@ -21,7 +21,7 @@ const PostListComponent = ({ state, actions }) => {
     return (
         <Container>
             <SearchContainer>
-                <SearchBox width="306px" center={true} />
+                <SearchBox state={state} actions={actions} width="306px" center={true} />
             </SearchContainer>
             <PostList posts={posts} />
             {posts.length === 0 && notFound}

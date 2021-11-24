@@ -4,8 +4,9 @@ import { Text } from '../constants/Text';
 import SearchIcon from '../public/icons/search.svg';
 import { useMemo } from 'react';
 import TimesIconSrc from '../public/icons/times.svg'
+import { forwardRef } from 'react';
 
-const SearchBoxComponent = ({ state, actions, center, width, closable, onClose, placeholder }) => {
+export const SearchBox = forwardRef(({ state, actions, center, width, closable, onClose, placeholder }, ref) => {
     const handleSearch = (value) => {
         if (value) {
             actions.router.set(`/?s=${value}`);
@@ -25,13 +26,11 @@ const SearchBoxComponent = ({ state, actions, center, width, closable, onClose, 
 
     return (
         <Container width={width}>
-            <TextField defaultValue={defaultSearchKeyword} placeholder={placeholder || Text.PlaceholderSearch} center={center} icon={SearchIcon} onSubmit={handleSearch} />
+            <TextField ref={ref} defaultValue={defaultSearchKeyword} placeholder={placeholder || Text.PlaceholderSearch} center={center} icon={SearchIcon} onSubmit={handleSearch} />
             {closable && <Icon onClick={onClose} src={TimesIconSrc} />}
         </Container>
     )
-}
-
-export const SearchBox = connect(SearchBoxComponent);
+});
 
 const Container = styled.div`
     display: flex;

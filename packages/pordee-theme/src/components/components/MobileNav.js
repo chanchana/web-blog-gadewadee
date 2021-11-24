@@ -6,15 +6,18 @@ import MenuIconSrc from '../public/icons/menu.svg';
 import SearchIconSrc from '../public/icons/search.svg';
 import TimesIconSrc from '../public/icons/times.svg';
 import ArrowIconSrc from '../public/icons/arrow.svg';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { transition } from '../utils/CssHelper';
 import { Font } from '../constants/Font';
 import { Parameter } from '../constants/Parameter';
 import { Text } from '../constants/Text';
+import { SearchBox } from './SearchBox';
 
-const MobileNavComponent = ({ state }) => {
-    const [overlayVisible, setOverlayVisible] = useState(true);
+const MobileNavComponent = ({ state, actions }) => {
+    const [menuOverlayVisible, setMenuOverlayVisible] = useState(false);
+    const [searchOverlayVisible, setSearchOverlayVisible] = useState(false);
     const [expanded, setExpanded] = useState(false);
+    const searchInput = useRef(null);
 
     const categories = state.theme.menu.slice(0, Parameter.MainCategoryCount);
     const subCategories = state.theme.menu.slice(Parameter.MainCategoryCount);
@@ -24,14 +27,22 @@ const MobileNavComponent = ({ state }) => {
     }, [state.router.link])
 
     const handleNavClick = () => {
-        setOverlayVisible(false);
+        setMenuOverlayVisible(false);
+        setSearchOverlayVisible(false);
         setExpanded(false);
     };
 
+    const handleOpenSearch = () => {
+        setSearchOverlayVisible(true);
+        setTimeout(() => {
+            searchInput.current.focus();
+        }, 300);
+    };
+
     const menuOverlay = (
-        <Overlay open={overlayVisible}>
-            {overlayVisible && <OuterPanel onClick={() => {if (overlayVisible) setOverlayVisible(false)}} />}
-            <Panel open={overlayVisible}>
+        <Overlay open={menuOverlayVisible}>
+            {menuOverlayVisible && <OuterPanel onClick={() => {if (menuOverlayVisible) setMenuOverlayVisible(false)}} />}
+            <Panel open={menuOverlayVisible}>
                 <NavList>
                     {categories.map(([name, link], index) => (
                         <NavItem key={`mobile-nav-item-${index}`} onClick={handleNavClick} ><Link link={link} style={{width: '100%'}}>{name}</Link></NavItem>
@@ -43,8 +54,19 @@ const MobileNavComponent = ({ state }) => {
                         <ExpandableNavItem expanded={expanded} key={`mobile-sub-nav-item-${index}`} onClick={handleNavClick} ><Link link={link} style={{width: '100%'}}>{name}</Link></ExpandableNavItem>
                     ))}
                 </ExpandableNavList>
-                <CloseIcon src={TimesIconSrc} onClick={() => setOverlayVisible(false)} />
+                <CloseIcon src={TimesIconSrc} onClick={() => setMenuOverlayVisible(false)} />
             </Panel>
+        </Overlay>
+    )
+
+    const searchOverlay = (
+        <Overlay open={searchOverlayVisible}>
+            <TopPanel open={searchOverlayVisible}>
+                <SearchBoxContainer>
+                    <SearchBox state={state} actions={actions} closable onClose={() => setSearchOverlayVisible(false)} ref={searchInput} />
+                </SearchBoxContainer>
+            </TopPanel>
+            {searchOverlayVisible && <OuterPanel onClick={() => {if (searchOverlayVisible) setSearchOverlayVisible(false)}} />}
         </Overlay>
     )
 
@@ -55,13 +77,13 @@ const MobileNavComponent = ({ state }) => {
                     <Link link="/">
                         <Icon src={LogoSrc} />
                     </Link>
-                    {/* <ColumnSpacer /> */}
-                    <Icon src={SearchIconSrc} marginLeft="auto" />
-                    <Icon src={MenuIconSrc} marginLeft="12px" onClick={() => setOverlayVisible(true)} />
+                    <Icon src={SearchIconSrc} marginLeft="auto" onClick={handleOpenSearch}/>
+                    <Icon src={MenuIconSrc} marginLeft="12px" onClick={() => setMenuOverlayVisible(true)} />
                 </InnerContainer>
             </MobileNavContainer>
             <Spacer />
             {menuOverlay}
+            {searchOverlay}
         </>
     );
 }
@@ -99,6 +121,7 @@ const Overlay = styled.div`
     height: 100%;
     background: ${props => props.open ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0)'};
     pointer-events: ${props => props.open ? 'all' : 'none'};
+    z-index: 999;
 `;
 
 const Panel = styled.div`
@@ -114,6 +137,24 @@ const Panel = styled.div`
     font-family: ${Font.IBMPlexSans};
     font-weight: 400;
 `;
+
+const TopPanel = styled.div`
+    ${transition}
+    top: ${props => props.open ? '0' : '-64px'};
+    left: 0;
+    width: 100%;
+    position: fixed;
+    background: ${Color.White};
+    height: 64px;
+    pointer-events: all;
+    font-family: ${Font.IBMPlexSans};
+    font-weight: 400;
+`;
+
+const SearchBoxContainer = styled.div`
+    margin: 16px;
+    height: 24px;
+`
 
 const OuterPanel = styled.div`
     width: 100%;

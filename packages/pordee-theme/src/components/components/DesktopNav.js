@@ -12,7 +12,7 @@ import LogoIconSrc from '../public/logo-icon.svg';
 import SearchIconSrc from '../public/icons/search.svg';
 import { SearchBox } from './SearchBox';
 
-const DesktopNavComponent = ({ state }) => {
+const DesktopNavComponent = ({ state, actions }) => {
 
     const [smallNavVisible, setSmallNavVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
@@ -101,7 +101,7 @@ const DesktopNavComponent = ({ state }) => {
             </div>
             {searchVisible &&
                 <MiniSearchBoxContainer>
-                    <SearchBox placeholder={Text.PlaceholderMiniSearch} width="104px" closable={true} onClose={() => setSearchVisible(false)} />
+                    <SearchBox state={state} actions={actions} placeholder={Text.PlaceholderMiniSearch} width="104px" closable={true} onClose={() => setSearchVisible(false)} />
                 </MiniSearchBoxContainer>
             }
         </>
