@@ -49,7 +49,7 @@ const PostComponent = ({ state, actions, libraries }) => {
                 <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                 <TagsContainer><Tags item={post} /></TagsContainer>
                 <DateAuthor>
-                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name} | {isMobile.toString()} {isTablet.toString()} {isDesktop.toString()}
+                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
                 </DateAuthor>
 
                 <FeaturedMedia id={post.featured_media} height="320px" />
@@ -89,6 +89,7 @@ const Container = styled.div`
 
 const DateAuthor = styled.div`
     font-family: ${Font.IBMPlexSans};
+    font-size: 12px;
     line-height: 16px;
     margin-bottom: 8px;
 `;
@@ -101,18 +102,18 @@ const PostContainer = styled.div`
 const TagsContainer = styled.div`
     text-align: center;
     margin-right: -12px;
-    margin-top: 8px;
-    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-bottom: 24px;
 `;
 
 const Title = styled.h1`
     font-family: ${Font.IBMPlexSans};
     margin: 0;
     margin-top: 24px;
-    margin-bottom: 8px;
-    font-size: 30px;
-    line-height: 38px;
-    font-weight: 600;
+    margin-bottom: 16px;
+    font-size: 28px;
+    line-height: 30.8px;
+    font-weight: 400;
     text-align: center;
     max-width: 526px;
     margin: auto;
@@ -148,7 +149,7 @@ const RelatedText = styled.dev`
     font-size: 24px;
     line-height: 110%;
     width: 100%;
-    margin: 32px 0 8px;
+    margin: 56px 0 8px;
     font-weight: 600;
     justify-content: center;
 `;

@@ -15,7 +15,6 @@ const HeaderComponent = ({ state }) => {
                     <LogoImage src={Logo} />
                 </LogoContainer>
             </Link>
-            <Description>{state.frontity.description}</Description>
             <DesktopNavContainer>
                 <DesktopNav />
             </DesktopNavContainer>
@@ -49,19 +48,5 @@ const LogoImage = styled.img`
 `;
 
 const DesktopNavContainer = styled.div`
-    margin-top: 40px;
-`;
-
-const Title = styled.h2`
-  margin: 0;
-  margin-bottom: 16px;
-`;
-
-const Description = styled.h4`
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
+    margin-top: 32px;
 `;

@@ -56,7 +56,7 @@ const ContentContainer = styled.div`
     max-width: 1136px;
     padding: 24px;
     margin: auto;
-    margin-top: 56px;
+    margin-top: 32px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     gap: 16px;
@@ -87,9 +87,10 @@ const Body = styled.div`
 
 const LinkLabel = styled.div`
     font-size: 14px;
-    line-height: 24px;
+    line-height: 23px;
     max-width: 352px;
     cursor: pointer;
+    margin-bottom: 4px;
 
     &:hover {
         text-decoration: underline;

@@ -77,6 +77,7 @@ const Excerpt = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    height: 44px;
 
     &>p {
         margin: 0;

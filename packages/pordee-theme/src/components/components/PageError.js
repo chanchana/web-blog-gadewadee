@@ -22,17 +22,16 @@ const Container = styled.div`
     font-family: ${Font.IBMPlexSans};
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
     font-size: 24px;
     line-height: 40px;
     height: 54px;
-
 `;
 
 const Description = styled.div`
     font-size: 18px;
     line-height: 30px;
-    height: 54px;
+    height: _/px;
     color: ${Color.Black50};
     margin-bottom: 48px;
 `;
