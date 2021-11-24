@@ -3,6 +3,7 @@ import { FeaturedCategoriesData } from '../constants/Parameter'
 import { Link } from '../components'
 import { Color } from '../constants/Color';
 import { Font } from '../constants/Font';
+import { mobileMediaQuery } from '../utils/MediaQuery';
 
 const FeaturedCategoriesComponent = ({ state }) => {
     return (
@@ -30,6 +31,12 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
     max-width: 1136px;
+
+    ${mobileMediaQuery} {
+        padding: 40px 16px 48px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
 `;
 
 const ItemContainer = styled.div`
@@ -40,6 +47,10 @@ const Image = styled.img`
     height: 160px;
     width: 100%;
     object-fit: cover;
+
+    ${mobileMediaQuery} {
+        height: 104px;
+    }
 `;
 
 const Item = styled.div`
@@ -61,5 +72,11 @@ const Item = styled.div`
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
     &:hover {
         text-decoration: underline;
+    }
+
+    ${mobileMediaQuery} {
+        height: 104px;
+        font-size: 20px;
+        line-height: 22px;
     }
 `;

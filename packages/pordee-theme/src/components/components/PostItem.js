@@ -4,6 +4,8 @@ import { FeaturedMedia, Tag } from ".";
 import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
 import { Tags } from "./Tags";
+import { useResponsive } from "../hooks/useResponsive";
+import { mobileMediaQuery } from "../utils/MediaQuery";
 
 /**
  * Item Component
@@ -17,12 +19,13 @@ const PostItemComponent = ({ state, item }) => {
     const allCategory = state.source.category;
     const author = state.source.author[item.author];
     const date = new Date(item.date);
+    const { isMobile } = useResponsive();
 
     return (
         <PostItemContainer>
             <Link link={item.link}>
                 {state.theme.featured.showOnList && (
-                    <FeaturedMedia id={item.featured_media} />
+                    <FeaturedMedia id={item.featured_media} height={isMobile && '200px'} />
                 )}
                 <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
             </Link>
@@ -64,6 +67,10 @@ const Title = styled.h1`
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
+
+    ${mobileMediaQuery} {
+        margin: 16px 0 8px;
+    }
 `;
 
 const Description = styled.div`
@@ -90,5 +97,11 @@ const Excerpt = styled.div`
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+    }
+
+    ${mobileMediaQuery} {
+        font-size: 12px;
+        line-height: 19.2px;
+        height: 37px;
     }
 `;

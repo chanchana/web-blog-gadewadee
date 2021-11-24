@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const breakpoint = {
+export const breakpoint = {
     maxMobile: 449,
     maxTablet: 999,
 }
