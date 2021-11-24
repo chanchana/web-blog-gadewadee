@@ -5,7 +5,7 @@ import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
 import { Tags } from "./Tags";
 import { useResponsive } from "../hooks/useResponsive";
-import { mobileMediaQuery } from "../utils/MediaQuery";
+import { desktopMediaQuery, mobileMediaQuery } from "../utils/MediaQuery";
 
 /**
  * Item Component
@@ -25,7 +25,7 @@ const PostItemComponent = ({ state, item }) => {
         <PostItemContainer>
             <Link link={item.link}>
                 {state.theme.featured.showOnList && (
-                    <FeaturedMedia id={item.featured_media} height={isMobile && '200px'} />
+                    <FeaturedMedia id={item.featured_media} />
                 )}
                 <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
             </Link>
@@ -58,7 +58,7 @@ const Title = styled.h1`
     box-sizing: border-box;
     font-family: ${Font.IBMPlexSans};
     line-height: 28px;
-    height: 56px;
+
     @supports (-webkit-line-clamp: 2) {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -66,6 +66,10 @@ const Title = styled.h1`
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+    }
+
+    ${desktopMediaQuery} {
+        height: 56px;
     }
 
     ${mobileMediaQuery} {
@@ -84,7 +88,6 @@ const Excerpt = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    height: 44px;
 
     &>p {
         margin: 0;
@@ -99,9 +102,12 @@ const Excerpt = styled.div`
         -webkit-box-orient: vertical;
     }
 
+    ${desktopMediaQuery} {
+        height: 44px;
+    }
+
     ${mobileMediaQuery} {
         font-size: 12px;
         line-height: 19.2px;
-        height: 37px;
     }
 `;
