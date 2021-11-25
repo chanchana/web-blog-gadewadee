@@ -139,6 +139,7 @@ const Panel = styled.div`
     pointer-events: all;
     font-family: ${Font.IBMPlexSans};
     font-weight: 400;
+    overflow: scroll;
 `;
 
 const TopPanel = styled.div`

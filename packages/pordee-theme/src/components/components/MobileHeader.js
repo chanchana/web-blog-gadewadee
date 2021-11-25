@@ -12,7 +12,7 @@ import ArrowIconSmallSrc from '../public/icons/arrow-small.svg';
 import { transition } from "../utils/CssHelper";
 
 const MobileHeaderComponent = ({ state }) => {
-    const [subCategoryExpanded, setSubCategoryExpanded] = useState(true);
+    const [subCategoryExpanded, setSubCategoryExpanded] = useState(false);
     const getCurrentUrl = () => decodeURI(state.router.link).split('page')[0]
     
     console.log(state.theme.menu.find(m => m[1] === getCurrentUrl()) || [1, 2])
