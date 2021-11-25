@@ -12,7 +12,7 @@ import { Font } from '../constants/Font';
 import { Parameter } from '../constants/Parameter';
 import { Text } from '../constants/Text';
 import { SearchBox } from './SearchBox';
-import MobileHeaderImageSrc from '../public/images/mobile_header_image.png'
+import { MobileHeader } from './MobileHeader';
 
 const MobileNavComponent = ({ state, actions }) => {
     const [menuOverlayVisible, setMenuOverlayVisible] = useState(false);
@@ -71,19 +71,6 @@ const MobileNavComponent = ({ state, actions }) => {
         </Overlay>
     )
 
-    const HeaderBanner = () => (
-        <HeaderImageContainer>
-            <HeaderImage src={MobileHeaderImageSrc} />
-            <HeaderImageOverlay />
-            <HeaderTextContainer>
-                <HeaderText>
-                    <HeaderTextHeading>{Text.BannerHeading}</HeaderTextHeading>
-                    <HeaderTextSubHeading>{Text.BannerSubHeading}</HeaderTextSubHeading>
-                </HeaderText>
-            </HeaderTextContainer>
-        </HeaderImageContainer>
-    )
-
     return (
         <>
             <MobileNavContainer>
@@ -96,7 +83,7 @@ const MobileNavComponent = ({ state, actions }) => {
                 </InnerContainer>
             </MobileNavContainer>
             <Spacer />
-            <HeaderBanner />
+            <MobileHeader />
             {menuOverlay}
             {searchOverlay}
         </>
@@ -229,63 +216,4 @@ const ExpandableNavItem = styled.div`
     height: ${props => (props.expanded ? "24px" : "0")};
     margin-bottom: 16px;
     color: ${Color.Black50};
-`;
-
-
-const HeaderImageContainer = styled.div`
-    position: relative;
-    display: flex;
-    font-family: ${Font.IBMPlexSans};
-`;
-
-const HeaderImage = styled.img`
-    width: 100%;
-    height: 224px;
-    object-fit: cover;
-    z-index: 1;
-`;
-
-const HeaderImageOverlay = styled.img`
-    width: 100%;
-    height: 224px;
-    background: rgba(0, 0, 0, 0.25);
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-`;
-
-const HeaderTextContainer = styled.div`
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 224px;
-    z-index: 3;
-    top: 0;
-    left: 0;
-`;
-
-const HeaderText = styled.div`
-    margin: auto;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    color: ${Color.White};
-`;
-
-const HeaderTextHeading = styled.div`
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    text-align: center;
-    font-size: 24px;
-    line-height: 40px;
-`;
-
-const HeaderTextSubHeading = styled.div`
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0em;
-    text-align: center;
-    font-size: 14px;
-    line-height: 23px;
-    max-width: 264px;
 `;

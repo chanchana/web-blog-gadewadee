@@ -12,6 +12,19 @@ import LogoIconSrc from '../public/logo-icon.svg';
 import SearchIconSrc from '../public/icons/search.svg';
 import { SearchBox } from './SearchBox';
 
+export const ExpandableNavList = ({ expanded, subCategories }) => (
+    <ExpandableList expanded={expanded}>
+        {subCategories.map(([name, link], index) => {
+            return (
+                <Link link={link} key={`expandable-nav-${index}`}>
+                    {index !== 0 && <Divider />}
+                    <ExpandableListItem expanded={expanded}>{name}</ExpandableListItem>
+                </Link>
+            )
+        })}
+    </ExpandableList>
+);
+
 const DesktopNavComponent = ({ state, actions }) => {
 
     const [smallNavVisible, setSmallNavVisible] = useState(false);
@@ -61,13 +74,6 @@ const DesktopNavComponent = ({ state, actions }) => {
         </NavItemContainer>
     )
 
-    const ExpandableNavItem = ({ label, selected, isMini }) => (
-        <ExpandableNavItemContainer onClick={() => setExpanded(!expanded)}>
-            <NavItemLabel selected={selected} isMini={isMini}>{label}<ExpandableNavItemIcon src={Arrow} expanded={expanded} /></NavItemLabel>
-            <NavItemHighlightImage src={HighlightBrushSrc} selected={selected} />
-        </ExpandableNavItemContainer>
-    )
-
     const SubNav = () => (
         isSelectedSubCategory && <SubNavContainer>
             <SubNavTitle>{Text.CategoryEtc}</SubNavTitle>
@@ -92,6 +98,13 @@ const DesktopNavComponent = ({ state, actions }) => {
                 </HeaderText>
             </HeaderTextContainer>
         </HeaderImageContainer>
+    )
+
+    const ExpandableNavItem = ({ label, selected, isMini }) => (
+        <ExpandableNavItemContainer onClick={() => setExpanded(!expanded)}>
+            <NavItemLabel selected={selected} isMini={isMini}>{label}<ExpandableNavItemIcon src={Arrow} expanded={expanded} /></NavItemLabel>
+            <NavItemHighlightImage src={HighlightBrushSrc} selected={selected} />
+        </ExpandableNavItemContainer>
     )
 
     const MiniSearch = () => (
@@ -120,16 +133,7 @@ const DesktopNavComponent = ({ state, actions }) => {
                 ))}
                 <div style={{ position: 'relative' }}>
                     <ExpandableNavItem label={Text.CategoryEtc} selected={isSelectedSubCategory} isMini={isMini} />
-                    <ExpandableList expanded={shouldExpand}>
-                        {subCategories.map(([name, link], index) => {
-                            return (
-                                <Link link={link} key={`expandable-nav-${index}`}>
-                                    {index !== 0 && <Divider />}
-                                    <ExpandableListItem expanded={shouldExpand}>{name}</ExpandableListItem>
-                                </Link>
-                            )
-                        })}
-                    </ExpandableList>
+                    <ExpandableNavList expanded={shouldExpand} subCategories={subCategories} />
                 </div>
             </Grid>
         )
@@ -270,7 +274,7 @@ const ExpandableList = styled.div`
     z-index: 10;
 `;
 
-const ExpandableListItem = styled.div`
+export const ExpandableListItem = styled.div`
     transition: all 0.3s;
     overflow: hidden;
     width: 152px;
@@ -282,7 +286,7 @@ const ExpandableListItem = styled.div`
     }
 `;
 
-const Divider = styled.div`
+export const Divider = styled.div`
     background: #C0C0C0;
     height: 1px;
     margin: 0 16px;

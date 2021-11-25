@@ -7,6 +7,7 @@ const Title = ({ state }) => {
   let title = state.frontity.title;
 
   if (data.isTaxonomy) {
+    console.log(data)
     // Add titles to taxonomies, like "Category: Nature - Blog Name" or "Tag: Japan - Blog Name".
     // 1. Get the taxonomy entity from the state to get its taxonomy term and name.
     const { taxonomy, name } = state.source[data.taxonomy][data.id];
