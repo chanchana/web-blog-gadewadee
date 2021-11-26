@@ -30,7 +30,7 @@ const FeaturedMediaComponent = ({ state, id, height }) => {
       ) || null;
 
   return (
-    <Container isAmp={state.frontity.mode === "amp"}>
+    <Container height={height} isAmp={state.frontity.mode === "amp"}>
       <StyledImage
         alt={media.title.rendered}
         src={media.source_url}
@@ -45,12 +45,13 @@ const FeaturedMediaComponent = ({ state, id, height }) => {
 export const FeaturedMedia = connect(FeaturedMediaComponent);
 
 const Container = styled.div`
-  height: 240px;
+  height: ${props => props.height || '240px'};
   ${({ isAmp }) => isAmp && "position: relative;"};
 
   ${mobileMediaQuery} {
-    height: 200px;
+    height: ${props => props.height || '200px'};
   }
+
 `;
 
 const StyledImage = styled(Image)`

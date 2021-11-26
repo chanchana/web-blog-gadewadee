@@ -67,7 +67,7 @@ const MobileHeaderComponent = ({ state }) => {
     return (
         <Container>
             {!isPost && state.router.link === '/' && headerBanner}
-            {category}
+            {!isPost && category}
         </Container>
     )
 }

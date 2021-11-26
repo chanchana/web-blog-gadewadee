@@ -41,7 +41,7 @@ const MobileTabletContainer = styled.div`
 `
 
 const TabletOrDesktopContainer = styled.div`
-    ${desktopMediaQuery} {
+    ${mobileMediaQuery} {
         display: none;
     }
 `

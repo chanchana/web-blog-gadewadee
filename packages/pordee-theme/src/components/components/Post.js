@@ -9,6 +9,8 @@ import { useState, useEffect } from 'react';
 import { getRelatedPosts } from "../utils/RelatedPost";
 import { PostList } from './PostList';
 import { useResponsive } from "../hooks/useResponsive";
+import { mobileMediaQuery } from "../utils/MediaQuery";
+import { IsMobileOrTablet, IsMobile, IsDesktop } from "./Responsive";
 
 const PostComponent = ({ state, actions, libraries }) => {
     const [relatedPosts, setRelatedPosts] = useState(null)
@@ -48,11 +50,19 @@ const PostComponent = ({ state, actions, libraries }) => {
             <PostContainer>
                 <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                 <TagsContainer><Tags item={post} /></TagsContainer>
-                <DateAuthor>
-                    {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
-                </DateAuthor>
 
-                <FeaturedMedia id={post.featured_media} height="320px" />
+                <IsDesktop>
+                    <DateAuthor>
+                        {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
+                    </DateAuthor>
+                    <FeaturedMedia id={post.featured_media} height="320px" />
+                </IsDesktop>
+                <IsMobileOrTablet>
+                    <FeaturedMedia id={post.featured_media} height="284px" />
+                    <DateAuthor>
+                        {date.getDate()} {Months[date.getMonth()]} {date.getFullYear() + 543}&nbsp;&nbsp;|&nbsp;&nbsp;{author.name}
+                    </DateAuthor>
+                </IsMobileOrTablet>
 
                 {data.isAttachment ? (
                     <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
@@ -70,9 +80,9 @@ const PostComponent = ({ state, actions, libraries }) => {
             </PostContainer>
             {relatedPosts && 
                 <RelatedContainer>
-                    <div style={{padding: '0 24px'}}>
+                    <DividerContainer>
                         <Divider />
-                    </div>
+                    </DividerContainer>
                     <RelatedText>{Text.PostRelated}</RelatedText>
                     <PostList posts={relatedPosts} />
                 </RelatedContainer>
@@ -92,11 +102,20 @@ const DateAuthor = styled.div`
     font-size: 12px;
     line-height: 16px;
     margin-bottom: 8px;
+
+    ${mobileMediaQuery} {
+        margin-top: 12px;
+        margin-bottom: 0;
+    }
 `;
 const PostContainer = styled.div`
     max-width: 720px;
     padding: 56px 24px 8px;
     margin: auto;
+
+    ${mobileMediaQuery} {
+        padding: 24px 16px 0;
+    }
 `;
 
 const TagsContainer = styled.div`
@@ -104,6 +123,11 @@ const TagsContainer = styled.div`
     margin-right: -12px;
     margin-top: 16px;
     margin-bottom: 24px;
+
+    ${mobileMediaQuery} {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
 `;
 
 const Title = styled.h1`
@@ -117,6 +141,12 @@ const Title = styled.h1`
     text-align: center;
     max-width: 526px;
     margin: auto;
+
+    ${mobileMediaQuery} {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 140%;
+    }
 `;
 
 const ShareContainer = styled.div`
@@ -129,12 +159,23 @@ const ShareContainer = styled.div`
     line-height: 24px;
     grid-auto-flow: column;
     gap: 12px;
+
+    ${mobileMediaQuery} {
+        margin: 32px auto;
+        font-size: 14px;
+        gap: 8px;
+    }
 `
 
 const ShareIcon = styled.img`
     width: 24px;
     height: 24px;
     cursor: pointer;
+
+    ${mobileMediaQuery} {
+        width: 20px;
+        height: 20px;
+    }
 `
 
 const RelatedContainer = styled.div`
@@ -152,6 +193,19 @@ const RelatedText = styled.dev`
     margin: 56px 0 8px;
     font-weight: 600;
     justify-content: center;
+
+    ${mobileMediaQuery} {
+        margin: 32px 0 8px;
+        font-size: 16px;
+    }
+`;
+
+const DividerContainer = styled.div`
+    padding: 0 24px;
+    
+    ${mobileMediaQuery} {
+        padding: 0 16px;
+    }
 `;
 
 const Divider = styled.div`
@@ -166,6 +220,12 @@ const Content = styled.div`
     line-height: 29px;
     color: ${Color.Black75};
     margin-top: 40px;
+    
+    ${mobileMediaQuery} {
+        margin-top: 32px;
+        font-size: 14px;
+        line-height: 28px;
+    }
 
     * {
         max-width: 100%;
