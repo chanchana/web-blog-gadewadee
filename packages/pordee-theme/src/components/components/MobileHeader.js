@@ -28,7 +28,7 @@ const MobileHeaderComponent = ({ state }) => {
     }, [state.router.link])
 
 
-    const Category = () => (
+    const category = (
         <CategoryContainer>
             <Overlay onClick={() => setSubCategoryExpanded(false)} expanded={subCategoryExpanded} />
             {!isSelectedSubCategory && <CategoryText>{categoryLink === '/' ? Text.CategoryAll : categoryName}</CategoryText>}
@@ -37,7 +37,7 @@ const MobileHeaderComponent = ({ state }) => {
                 <CategorySubText onClick={() => setSubCategoryExpanded(true)}>{categoryName}<ExpandableNavItemIcon src={ArrowIconSmallSrc} expanded={subCategoryExpanded} /></CategorySubText>
             </>}
             <ExpandableListContainer>
-                <ExpandableList expanded={subCategoryExpanded}>
+                <ExpandableList expanded={subCategoryExpanded} style={{pointerEvents: 'all'}}>
                     {subCategoriesWithDefault.map(([name, link], index) => {
                         return (
                             <Link link={link} key={`expandable-nav-${index}`}>
@@ -51,7 +51,7 @@ const MobileHeaderComponent = ({ state }) => {
         </CategoryContainer>
     )
 
-    const HeaderBanner = () => (
+    const headerBanner = (
         <HeaderImageContainer>
             <HeaderImage src={MobileHeaderImageSrc} />
             <HeaderImageOverlay />
@@ -66,8 +66,8 @@ const MobileHeaderComponent = ({ state }) => {
 
     return (
         <Container>
-            {!isPost && state.router.link === '/' && <HeaderBanner />}
-            <Category />
+            {!isPost && state.router.link === '/' && headerBanner}
+            {category}
         </Container>
     )
 }
@@ -84,7 +84,7 @@ const CategoryContainer = styled.div`
 const ExpandableList = styled.div`
     margin: auto;
     opacity: ${props => (props.expanded ? "1" : "0")};
-    max-height: ${props => (props.expanded ? "fit-content" : "0")};
+    max-height: ${props => props.expanded ? '800px' : "0"};
     overflow: hidden;
     transition: all 0.3s;
     background: #FFFFFF;
@@ -171,6 +171,8 @@ const ExpandableListContainer = styled.div`
     display: flex;
     width: calc(100% - 32px);
     margin-top: 12px;
+    pointer-events: none;
+    z-index: 11;
 `;
 
 const Overlay = styled.div`
@@ -180,6 +182,7 @@ const Overlay = styled.div`
     pointer-events: ${props => props.expanded ? 'all' : 'none'};
     top: 0;
     left: 0;
+    z-index: 10;
 `
 
 const ExpandableNavItemIcon = styled.img`
@@ -188,5 +191,5 @@ const ExpandableNavItemIcon = styled.img`
     font-size: 20px;
     width: 20px;
     height: 20px;
-    transform: ${props => props.expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transform: ${props => props.expanded ? 'rotate(0deg)' : 'rotate(180deg)'};
 `
