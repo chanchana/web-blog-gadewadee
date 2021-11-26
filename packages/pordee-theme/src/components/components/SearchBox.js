@@ -5,6 +5,7 @@ import SearchIcon from '../public/icons/search.svg';
 import { useMemo } from 'react';
 import TimesIconSrc from '../public/icons/times.svg'
 import { forwardRef } from 'react';
+import { getSearchKeyword } from "../utils/Search";
 
 export const SearchBox = forwardRef(({ state, actions, center, width, closable, onClose, placeholder }, ref) => {
     const handleSearch = (value) => {
@@ -16,12 +17,7 @@ export const SearchBox = forwardRef(({ state, actions, center, width, closable, 
     }
 
     const defaultSearchKeyword = useMemo(() => {
-        const url = decodeURI(state.router.link);
-        const searchParams = url.split('/?s=');
-        if (searchParams.length > 1) {
-            return searchParams[1];
-        }
-        return undefined;
+        return getSearchKeyword(state);
     }, [state.router.link])
 
     return (

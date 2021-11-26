@@ -10,9 +10,11 @@ import { ExpandableListItem, Divider } from "./DesktopNav";
 import { Link } from '.'
 import ArrowIconSmallSrc from '../public/icons/arrow-small.svg';
 import { transition } from "../utils/CssHelper";
+import { getSearchKeyword } from "../utils/Search";
 
 const MobileHeaderComponent = ({ state }) => {
     const [subCategoryExpanded, setSubCategoryExpanded] = useState(false);
+    const [searchKeyword, setSearchKeyword] = useState();
     const getCurrentUrl = () => decodeURI(state.router.link).split('page')[0]
     
     console.log(state.theme.menu.find(m => m[1] === getCurrentUrl()) || [1, 2])
@@ -25,14 +27,15 @@ const MobileHeaderComponent = ({ state }) => {
 
     useEffect(() => {
         setSubCategoryExpanded(false);
+        setSearchKeyword(getSearchKeyword(state));
     }, [state.router.link])
-
 
     const category = (
         <CategoryContainer>
             <Overlay onClick={() => setSubCategoryExpanded(false)} expanded={subCategoryExpanded} />
-            {!isSelectedSubCategory && <CategoryText>{categoryLink === '/' ? Text.CategoryAll : categoryName}</CategoryText>}
-            {isSelectedSubCategory && <>
+            {searchKeyword && <CategoryText>"{searchKeyword}"</CategoryText>}
+            {(!searchKeyword && !isSelectedSubCategory) && <CategoryText>{categoryLink === '/' ? Text.CategoryAll : categoryName}</CategoryText>}
+            {(!searchKeyword && isSelectedSubCategory) && <>
                 <CategoryText>{Text.CategoryEtc}</CategoryText>
                 <CategorySubText onClick={() => setSubCategoryExpanded(true)}>{categoryName}<ExpandableNavItemIcon src={ArrowIconSmallSrc} expanded={subCategoryExpanded} /></CategorySubText>
             </>}
@@ -79,6 +82,7 @@ const Container = styled.div``;
 const CategoryContainer = styled.div`
     font-family: ${Font.IBMPlexSans};
     margin: 32px 16px 8px;
+    overflow-wrap: break-word;
 `;
 
 const ExpandableList = styled.div`

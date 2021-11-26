@@ -29,7 +29,7 @@ const SpinAnimation = css`
 const Container = styled.div`
   width: 800px;
   margin: 0;
-  padding: 56px;
+  padding: 240px 56px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -36,8 +36,7 @@ export const Pagination = connect(PaginationComponent);
 const PaginationContainer = styled.div`
     font-family: ${Font.IBMPlexSans};
     display: flex;
-    margin: auto;
-    margin-top: 36px;
+    margin: 36px auto;
 `;
 
 const Button = styled.div`

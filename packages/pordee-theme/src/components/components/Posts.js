@@ -8,6 +8,7 @@ import { GoHomeButton } from "./GoHomeButton";
 import { Text } from "../constants/Text";
 import { IsDesktop } from "./Responsive";
 import { useResponsive } from "../hooks/useResponsive";
+import { mobileMediaQuery } from "../utils/MediaQuery";
 
 const PostListComponent = ({ state, actions }) => {
     const data = state.source.get(state.router.link);
@@ -33,7 +34,7 @@ const PostListComponent = ({ state, actions }) => {
             <PaginationContainer>
                 <Pagination />
             </PaginationContainer>
-            <FeaturedCategories />
+            {!(posts.length === 0) && <FeaturedCategories />}
         </Container>
     );
 };
@@ -54,11 +55,18 @@ const NotFound = styled.div`
     height: 54px;
     text-align: center;
     padding: 32px 24px 96px;
-    font-weight: 600;
+    font-weight: 400;
+
+    ${mobileMediaQuery} {
+        padding: 174px 16px 240px;
+        font-size: 18px;
+        line-height: 30px;
+    }
 `;
 
 const Container = styled.div`
     display: block;
+    width: 100%;
 `;
 
 const PaginationContainer = styled.div`

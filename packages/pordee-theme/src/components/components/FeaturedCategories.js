@@ -6,8 +6,11 @@ import { Font } from '../constants/Font';
 import { mobileMediaQuery } from '../utils/MediaQuery';
 
 const FeaturedCategoriesComponent = ({ state }) => {
+    const data = state.source.get(state.router.link);
+    const isError = data.isError;
+
     return (
-        <Container>
+        (!isError) && <Container>
             {FeaturedCategoriesData.map(({menuIndex, image}, index) => {
                 const [name, link] = state.theme.menu[menuIndex];
                 return (
@@ -31,6 +34,7 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
     max-width: 1136px;
+    margin: auto;
 
     ${mobileMediaQuery} {
         padding: 40px 16px 48px;
