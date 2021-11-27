@@ -35,9 +35,10 @@ const MobileNavComponent = ({ state, actions }) => {
 
     const handleOpenSearch = () => {
         setSearchOverlayVisible(true);
-        setTimeout(() => {
-            searchInput.current.focus();
-        }, 300);
+        // disable because mobile browser limitation
+        // setTimeout(() => {
+        //     searchInput.current.focus();
+        // }, 300);
     };
 
     const menuOverlay = (

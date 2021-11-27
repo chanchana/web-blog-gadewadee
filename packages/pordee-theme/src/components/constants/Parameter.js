@@ -2,11 +2,11 @@ import Featured1Src from '../public/images/featured-1.png';
 import Featured2Src from '../public/images/featured-2.png';
 import Featured3Src from '../public/images/featured-3.png';
 
-import SocialFacebookSrc from '../public/icons/social-facebook.svg'
-import SocialTwitterSrc from '../public/icons/social-twitter.svg'
-import SocialInstagramSrc from '../public/icons/social-instagram.svg'
-import SocialClubhouseSrc from '../public/icons/social-clubhouse.svg'
-import SocialLineSrc from '../public/icons/social-line.svg'
+import SocialFacebookSrc from '../public/icons/social-facebook.png'
+import SocialTwitterSrc from '../public/icons/social-twitter.png'
+import SocialInstagramSrc from '../public/icons/social-instagram.png'
+import SocialClubhouseSrc from '../public/icons/social-clubhouse.png'
+import SocialLineSrc from '../public/icons/social-line.png'
 
 export const Parameter = {
     MainCategoryCount: 5,

@@ -4,6 +4,8 @@ import Posts from "./components/Posts";
 import Title from "./title";
 import { Header, Post, PageError, Loading, Footer } from './components'
 import IconLogoSrc from './public/logo-icon.svg'
+import smoothscroll from 'smoothscroll-polyfill';
+import { useEffect } from 'react';
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -17,12 +19,17 @@ const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
 
+  useEffect(() => {
+    smoothscroll.polyfill();
+  }, [])
+
   return (
     <>
       {/* Add some metatags to the <head> of the HTML. */}
       <Title />
       <Head>
         <meta name="description" content={state.frontity.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <html lang="en" />
       </Head>
 

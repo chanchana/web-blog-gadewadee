@@ -1,12 +1,12 @@
 import { connect, styled } from "frontity";
-import { FeaturedCategories, Flex } from ".";
+import { FeaturedCategories, Flex, ScrollUp } from ".";
 import { Pagination } from "./Pagination";
 import { SearchBox } from "./SearchBox";
 import { PostList } from './PostList';
 import { Font } from "../constants/Font";
 import { GoHomeButton } from "./GoHomeButton";
 import { Text } from "../constants/Text";
-import { IsDesktop } from "./Responsive";
+import { IsMobile } from "./Responsive";
 import { useResponsive } from "../hooks/useResponsive";
 import { mobileMediaQuery } from "../utils/MediaQuery";
 
@@ -35,6 +35,7 @@ const PostListComponent = ({ state, actions }) => {
                 <Pagination />
             </PaginationContainer>
             {!(posts.length === 0) && <FeaturedCategories />}
+            <IsMobile><ScrollUp /></IsMobile>
         </Container>
     );
 };
