@@ -1,8 +1,8 @@
 import { connect, styled } from "frontity";
-import { ScrollUp, Link, FeaturedMedia, Flex } from "../components";
+import { ScrollUp, FeaturedMedia } from "../components";
 import { Font } from "../constants/Font";
 import { Tags } from "./Tags";
-import { Months, ShareLinks } from "../constants/Parameter";
+import { Months } from "../constants/Parameter";
 import { Color } from "../constants/Color";
 import { Text } from "../constants/Text";
 import { useState, useEffect } from 'react';
@@ -10,7 +10,7 @@ import { getRelatedPosts } from "../utils/RelatedPost";
 import { PostList } from './PostList';
 import { useResponsive } from "../hooks/useResponsive";
 import { mobileMediaQuery } from "../utils/MediaQuery";
-import { IsMobileOrTablet, IsMobile, IsDesktop } from "./Responsive";
+import { IsMobileOrTablet, IsDesktop } from "./Responsive";
 import { FacebookShareButton, LineShareButton, TwitterShareButton } from "react-share";
 import SocialFacebookSrc from '../public/icons/social-facebook.png'
 import SocialTwitterSrc from '../public/icons/social-twitter.png'
@@ -18,18 +18,13 @@ import SocialLineSrc from '../public/icons/social-line.png'
 
 const PostComponent = ({ state, actions, libraries }) => {
     const [relatedPosts, setRelatedPosts] = useState(null)
-    // Get information about the current URL.
     const data = state.source.get(state.router.link);
-    // Get the data of the post.
     const post = state.source[data.type][data.id];
-    // Get the data of the author.
     const author = state.source.author[post.author];
-    // Get a human readable date.
     const date = new Date(post.date);
 
-    // Get the html2react component.
     const Html2React = libraries.html2react.Component;
-    const { isMobile, isTablet, isDesktop } = useResponsive();
+    const { isTablet } = useResponsive();
     const [currentUrl, setCurrentUrl] = useState('');
 
     useEffect(() => {
@@ -64,13 +59,6 @@ const PostComponent = ({ state, actions, libraries }) => {
         </ShareContainer>
     )
 
-    /**
-     * Once the post has loaded in the DOM, prefetch both the
-     * home posts and the list component so if the user visits
-     * the home page, everything is ready and it loads instantly.
-     */
-
-    // Load the post, but only if the data is ready.
     return data.isReady && (
         <Container>
             <PostContainer>

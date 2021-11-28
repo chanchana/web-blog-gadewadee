@@ -1,4 +1,4 @@
-import { connect, styled } from "frontity";
+import { styled } from "frontity";
 import { TextField } from "./TextField";
 import { Text } from '../constants/Text';
 import SearchIcon from '../public/icons/search.svg';

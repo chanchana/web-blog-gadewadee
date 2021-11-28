@@ -54,11 +54,7 @@ const settings = {
               "อื่น ๆ",
               "/category/อื่น ๆ/"
             ],
-          ],
-          "featured": {
-            "showOnList": true,
-            "showOnPost": true
-          }
+          ]
         }
       }
     },

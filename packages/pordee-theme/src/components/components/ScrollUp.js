@@ -6,10 +6,6 @@ export const ScrollUp = () => {
     const [visible, setVisible] = useState(false);
 
     const handleScroll = () => {
-        console.log({
-            current: window.pageYOffset,
-            height: window.screen.height,
-        })
         if (window.pageYOffset > 360) {
             setVisible(true);
         } else {
@@ -45,7 +41,6 @@ const Container = styled.div`
     bottom: 0;
     left: 0;
     display: flex;
-    /* left: 0; */
 `;
 
 const ButtonContainer = styled.div`
@@ -63,5 +58,3 @@ const Button = styled.img`
     margin-bottom: 44px;
     cursor: pointer;
 `;
-
-// window.screen.height;

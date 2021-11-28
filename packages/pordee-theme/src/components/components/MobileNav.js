@@ -179,7 +179,7 @@ const NavItem = styled.div`
     align-items: center;
     font-size: 16px;
 
-    &:first-child {
+    &:first-of-type {
         border-top: none;
     }
 `

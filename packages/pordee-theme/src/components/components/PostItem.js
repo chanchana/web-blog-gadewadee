@@ -1,35 +1,18 @@
 import { connect, styled } from "frontity";
 import { Link } from "./Link";
-import { FeaturedMedia, Tag } from ".";
+import { FeaturedMedia } from ".";
 import { Color } from "../constants/Color";
 import { Font } from "../constants/Font";
 import { Tags } from "./Tags";
-import { useResponsive } from "../hooks/useResponsive";
 import { desktopMediaQuery, mobileMediaQuery } from "../utils/MediaQuery";
 
-/**
- * Item Component
- *
- * It renders the preview of a blog post. Each blog post contains
- * - Title: clickable title of the post
- * - Author: name of author and published date
- * - FeaturedMedia: the featured image/video of the post
- */
 const PostItemComponent = ({ state, item }) => {
-    const allCategory = state.source.category;
-    const author = state.source.author[item.author];
-    const date = new Date(item.date);
-    const { isMobile } = useResponsive();
-
     return (
         <PostItemContainer>
             <Link link={item.link}>
-                {state.theme.featured.showOnList && (
-                    <FeaturedMedia id={item.featured_media} />
-                )}
+                <FeaturedMedia id={item.featured_media} />
                 <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
             </Link>
-
 
             <Description>
                 <Link link={item.link}>
@@ -43,7 +26,6 @@ const PostItemComponent = ({ state, item }) => {
     );
 };
 
-// Connect the Item to gain access to `state` as a prop
 export const PostItem = connect(PostItemComponent);
 
 const PostItemContainer = styled.div`

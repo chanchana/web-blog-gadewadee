@@ -9,8 +9,8 @@ import { Color } from "../constants/Color";
 const PaginationComponent = ({ state, actions }) => {
     const { next, previous, totalPages, page } = state.source.get(state.router.link);
 
-    // Pre-fetch the the next page if it hasn't been fetched yet.
     useEffect(() => {
+        // pre-fetch next page
         if (next) actions.source.fetch(next);
     }, []);
 

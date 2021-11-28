@@ -24,8 +24,8 @@ const MobileFooterComponent = ({ state }) => {
                 </LinkList>
                 <ContactContainer>
                     {SocialContacts.map(({label, icon, link}, index) => (
-                        <Link link={link} style={{height: '24px'}}>
-                            <SocialLabel key={`footer-contact-link-${index}`}><img src={icon} style={{marginRight: '8px', width: '20px', height: '20px'}}/></SocialLabel>
+                        <Link key={`footer-contact-link-${index}`} link={link} style={{height: '24px'}}>
+                            <SocialLabel ><img src={icon} style={{marginRight: '8px', width: '20px', height: '20px'}}/></SocialLabel>
                         </Link>
                     ))}
                 </ContactContainer>
@@ -52,29 +52,6 @@ const ContentContainer = styled.div`
 
 const Logo = styled.img`
     height: 60px;
-`;
-
-const LargeItem = styled.div`
-    grid-column-start: 1;
-    grid-column-end: 3;
-`;
-
-const Item = styled.div`
-    
-`;
-
-const Heading = styled.div`
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 30px;
-    margin-bottom: 12px;
-`;
-
-const Body = styled.div`
-    font-size: 14px;
-    line-height: 23px;
-    max-width: 352px;
 `;
 
 const LinkList = styled.div`

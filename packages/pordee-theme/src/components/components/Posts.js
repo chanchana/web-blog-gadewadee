@@ -1,5 +1,5 @@
 import { connect, styled } from "frontity";
-import { FeaturedCategories, Flex, ScrollUp } from ".";
+import { FeaturedCategories, ScrollUp } from ".";
 import { Pagination } from "./Pagination";
 import { SearchBox } from "./SearchBox";
 import { PostList } from './PostList';

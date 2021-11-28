@@ -17,13 +17,11 @@ const MobileHeaderComponent = ({ state }) => {
     const [searchKeyword, setSearchKeyword] = useState();
     const getCurrentUrl = () => decodeURI(state.router.link).split('page')[0]
     
-    console.log(state.theme.menu.find(m => m[1] === getCurrentUrl()) || [1, 2])
     const [categoryName, categoryLink] = state.theme.menu.find(m => m[1] === getCurrentUrl()) || ['', ''];
     const subCategories = state.theme.menu.slice(Parameter.MainCategoryCount);
     const isSelectedSubCategory = subCategories.map(s => s[1]).includes(categoryLink);
     const subCategoriesWithDefault = [['ทั้งหมด', '/']].concat(subCategories);
     const isPost = state.source.get(state.router.link).isPostType;
-    const isError = state.source.get(state.router.link).isError;
 
     useEffect(() => {
         setSubCategoryExpanded(false);
