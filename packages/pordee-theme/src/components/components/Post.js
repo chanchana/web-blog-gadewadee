@@ -11,6 +11,11 @@ import { PostList } from './PostList';
 import { useResponsive } from "../hooks/useResponsive";
 import { mobileMediaQuery } from "../utils/MediaQuery";
 import { IsMobileOrTablet, IsMobile, IsDesktop } from "./Responsive";
+import { FacebookShareButton, LineShareButton, TwitterShareButton } from "react-share";
+import SocialFacebookSrc from '../public/icons/social-facebook.png'
+import SocialTwitterSrc from '../public/icons/social-twitter.png'
+import SocialLineSrc from '../public/icons/social-line.png'
+import { useMemo } from 'react';
 
 const PostComponent = ({ state, actions, libraries }) => {
     const [relatedPosts, setRelatedPosts] = useState(null)
@@ -37,6 +42,29 @@ const PostComponent = ({ state, actions, libraries }) => {
             });
         }
     }, [state, post, data.isReady, isTablet]);
+
+    const currentUrl = useMemo(() => {
+        if (window) {
+            console.log(window.location.href)
+            return decodeURI(window.location.href);
+        }
+        return '';
+    }, [window])
+
+    const share = (
+        <ShareContainer>
+            <div>{Text.Share}</div>
+            <TwitterShareButton url={currentUrl}>
+                <ShareIcon src={SocialTwitterSrc} />
+            </TwitterShareButton>
+            <FacebookShareButton url={currentUrl}>
+                <ShareIcon src={SocialFacebookSrc} />
+            </FacebookShareButton>
+            <LineShareButton url={currentUrl}>
+                <ShareIcon src={SocialLineSrc} />
+            </LineShareButton>
+        </ShareContainer>
+    )
 
     /**
      * Once the post has loaded in the DOM, prefetch both the
@@ -71,12 +99,7 @@ const PostComponent = ({ state, actions, libraries }) => {
                         <Html2React html={post.content.rendered} />
                     </Content>
                 )}
-                <ShareContainer>
-                    <div>{Text.Share}</div>
-                    {ShareLinks.map(({label, icon, link}, index) => (
-                        <ShareIcon key={`share-link-${label}`} src={icon} />
-                    ))}
-                </ShareContainer>
+                {share}
             </PostContainer>
             {relatedPosts && 
                 <RelatedContainer>

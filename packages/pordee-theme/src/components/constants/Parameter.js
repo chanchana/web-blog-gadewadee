@@ -6,7 +6,6 @@ import SocialFacebookSrc from '../public/icons/social-facebook.png'
 import SocialTwitterSrc from '../public/icons/social-twitter.png'
 import SocialInstagramSrc from '../public/icons/social-instagram.png'
 import SocialClubhouseSrc from '../public/icons/social-clubhouse.png'
-import SocialLineSrc from '../public/icons/social-line.png'
 
 export const Parameter = {
     MainCategoryCount: 5,
@@ -48,24 +47,6 @@ export const SocialContacts = [
     {
         label: 'Clubhouse',
         icon: SocialClubhouseSrc,
-        link: '',
-    },
-]
-
-export const ShareLinks = [
-    {
-        label: 'Facebook',
-        icon: SocialFacebookSrc,
-        link: '',
-    },
-    {
-        label: 'Twitter',
-        icon: SocialTwitterSrc,
-        link: '',
-    },
-    {
-        label: 'Line',
-        icon: SocialLineSrc,
         link: '',
     },
 ]
