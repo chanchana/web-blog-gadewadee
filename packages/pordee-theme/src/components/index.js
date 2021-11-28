@@ -61,6 +61,9 @@ const globalStyles = css`
             scroll-behavior: auto;
         }
     }
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
 `;
 
 const Main = styled.div`
