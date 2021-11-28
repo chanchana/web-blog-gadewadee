@@ -28,8 +28,8 @@ const TagContainer = styled.div`
     margin-bottom: 12px;
     cursor: pointer;
     font-family: ${Font.IBMPlexSans};
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 23px;
     color: ${Color.Black};
 
     &:hover {

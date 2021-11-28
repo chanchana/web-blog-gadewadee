@@ -99,8 +99,8 @@ const Container = styled.div`
 
 const DateAuthor = styled.div`
     font-family: ${Font.IBMPlexSans};
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 23px;
     margin-bottom: 8px;
 
     ${mobileMediaQuery} {
@@ -223,8 +223,8 @@ const Content = styled.div`
     
     ${mobileMediaQuery} {
         margin-top: 32px;
-        font-size: 14px;
-        line-height: 28px;
+        font-size: 16px;
+        line-height: 200%;
     }
 
     * {

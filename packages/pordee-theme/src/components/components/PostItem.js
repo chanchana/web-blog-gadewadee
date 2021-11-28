@@ -107,7 +107,7 @@ const Excerpt = styled.div`
     }
 
     ${mobileMediaQuery} {
-        font-size: 12px;
-        line-height: 19.2px;
+        font-size: 14px;
+        line-height: 160%;
     }
 `;

@@ -1,7 +1,7 @@
 import { styled, connect } from 'frontity';
 import { Link } from '.';
 import { Color } from '../constants/Color';
-import LogoSrc from '../public/logo.svg';
+import LogoMobileSrc from '../public/logo-mobile.svg';
 import MenuIconSrc from '../public/icons/menu.svg';
 import SearchIconSrc from '../public/icons/search.svg';
 import TimesIconSrc from '../public/icons/times.svg';
@@ -77,7 +77,7 @@ const MobileNavComponent = ({ state, actions }) => {
             <MobileNavContainer>
                 <InnerContainer>
                     <Link link="/">
-                        <Icon src={LogoSrc} />
+                        <Icon src={LogoMobileSrc} />
                     </Link>
                     <Icon src={SearchIconSrc} marginLeft="auto" onClick={handleOpenSearch}/>
                     <Icon src={MenuIconSrc} marginLeft="12px" onClick={() => setMenuOverlayVisible(true)} />
