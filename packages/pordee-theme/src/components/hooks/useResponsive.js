@@ -27,7 +27,6 @@ export const useResponsive = () => {
         } else {
             desktop = true;
         }
-        console.log(width, mobile, tablet, desktop);
         setIsMobile(mobile);
         setIsTablet(tablet);
         setIsDesktop(desktop);

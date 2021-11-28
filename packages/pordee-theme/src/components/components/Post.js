@@ -15,7 +15,6 @@ import { FacebookShareButton, LineShareButton, TwitterShareButton } from "react-
 import SocialFacebookSrc from '../public/icons/social-facebook.png'
 import SocialTwitterSrc from '../public/icons/social-twitter.png'
 import SocialLineSrc from '../public/icons/social-line.png'
-import { useMemo } from 'react';
 
 const PostComponent = ({ state, actions, libraries }) => {
     const [relatedPosts, setRelatedPosts] = useState(null)
@@ -31,6 +30,7 @@ const PostComponent = ({ state, actions, libraries }) => {
     // Get the html2react component.
     const Html2React = libraries.html2react.Component;
     const { isMobile, isTablet, isDesktop } = useResponsive();
+    const [currentUrl, setCurrentUrl] = useState('');
 
     useEffect(() => {
         if (state && post && data.isReady) {
@@ -43,13 +43,11 @@ const PostComponent = ({ state, actions, libraries }) => {
         }
     }, [state, post, data.isReady, isTablet]);
 
-    const currentUrl = useMemo(() => {
+    useEffect(() => {
         if (window) {
-            console.log(window.location.href)
-            return decodeURI(window.location.href);
+            setCurrentUrl(decodeURI(window.location.href));
         }
-        return '';
-    }, [window])
+    }, [])
 
     const share = (
         <ShareContainer>
