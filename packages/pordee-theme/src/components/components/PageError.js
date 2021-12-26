@@ -5,12 +5,12 @@ import { Text } from "../constants/Text";
 import { mobileMediaQuery } from "../utils/MediaQuery";
 import { GoHomeButton } from './GoHomeButton';
 
-export const PageError = () => {
+export const PageError = ({ handleHome }) => {
     return (
         <Container>
             <Title>{Text.ErrorHeading}</Title>
             <Description>{Text.ErrorSubHeading}</Description>
-            <GoHomeButton />
+            <GoHomeButton handleHome={handleHome} />
         </Container>
     );
 };

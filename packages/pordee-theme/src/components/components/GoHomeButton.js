@@ -2,9 +2,8 @@ import { styled } from 'frontity'
 import { Color } from '../constants/Color';
 import { Font } from '../constants/Font';
 import { Text } from '../constants/Text';
-import { Link } from './Link'
 
-export const GoHomeButton = () => {
+export const GoHomeButton = ({ handleHome }) => {
     const arrow = (
         <svg width="25" height="24" viewBox="0 0 25 24" fill="unset" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.5 12H19.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -13,9 +12,7 @@ export const GoHomeButton = () => {
         </svg>
     )
     return (
-        <Link link="/">
-            <Button><Icon>{arrow}</Icon>{Text.ButtonGoHome}</Button>
-        </Link>
+        <Button onClick={handleHome}><Icon>{arrow}</Icon>{Text.ButtonGoHome}</Button>
     );
 }
 
