@@ -29,9 +29,9 @@ const DesktopFooterComponent = ({ state }) => {
                     <Heading>{Text.FooterContact}</Heading>
                     <ContactContainer>
                         {SocialContacts.map(({label, icon, link}, index) => (
-                            <Link key={`footer-contact-link-${index}`} link={link} style={{height: '24px'}}>
+                            <div key={`footer-contact-link-${index}`} link={link} style={{height: '24px'}} onClick={()=> window.open(link, '_blank')}>
                                 <SocialLabel ><img src={icon} style={{marginRight: '8px', width: '20px', height: '20px'}}/>{label}</SocialLabel>
-                            </Link>
+                            </div>
                         ))}
                     </ContactContainer>
                 </Item>

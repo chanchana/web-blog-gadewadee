@@ -24,9 +24,9 @@ const MobileFooterComponent = ({ state }) => {
                 </LinkList>
                 <ContactContainer>
                     {SocialContacts.map(({label, icon, link}, index) => (
-                        <Link key={`footer-contact-link-${index}`} link={link} style={{height: '24px'}}>
+                        <div key={`footer-contact-link-${index}`} style={{height: '24px'}} onClick={()=> window.open(link, '_blank')}>
                             <SocialLabel ><img src={icon} style={{marginRight: '8px', width: '20px', height: '20px'}}/></SocialLabel>
-                        </Link>
+                        </div>
                     ))}
                 </ContactContainer>
             </ContentContainer>

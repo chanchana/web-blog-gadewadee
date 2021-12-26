@@ -32,21 +32,21 @@ export const SocialContacts = [
     {
         label: 'Facebook',
         icon: SocialFacebookSrc,
-        link: '',
+        link: 'https://www.facebook.com/Gademaru/?show_switched_toast=1&show_invite_to_follow=0&show_switched_tooltip=0&show_podcast_settings=0&show_community_transition=0&show_community_review_changes=0',
     },
     {
         label: 'Twitter',
         icon: SocialTwitterSrc,
-        link: '',
+        link: 'https://twitter.com/gadewadee_maru',
     },
     {
         label: 'Instagram',
         icon: SocialInstagramSrc,
-        link: '',
+        link: 'https://www.instagram.com/gadewadee_marumura',
     },
     {
         label: 'Clubhouse',
         icon: SocialClubhouseSrc,
-        link: '',
+        link: 'https://www.clubhouse.com/@kritinee',
     },
 ]
