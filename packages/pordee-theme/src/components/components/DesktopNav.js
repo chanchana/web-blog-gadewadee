@@ -25,7 +25,7 @@ export const ExpandableNavList = ({ expanded, subCategories }) => (
     </ExpandableList>
 );
 
-const DesktopNavComponent = ({ state, actions }) => {
+const DesktopNavComponent = ({ state, actions, handleHome }) => {
 
     const [smallNavVisible, setSmallNavVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
@@ -152,9 +152,9 @@ const DesktopNavComponent = ({ state, actions }) => {
                 {smallNavVisible && 
                     <MiniNavigationBarContainer>
                         <MiniNavigationBar visible={smallNavVisible}>
-                            <Link link="/">
+                            <div onClick={handleHome}>
                                 <img src={LogoIconSrc} />
-                            </Link>
+                            </div>
                             {renderNavItems('760px', true)}
                             <MiniSearch />
                         </MiniNavigationBar>

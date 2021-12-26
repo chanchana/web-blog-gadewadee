@@ -5,13 +5,31 @@ import Title from "./title";
 import { Header, Post, PageError, Loading, Footer } from './components'
 import IconLogoSrc from './public/logo-icon.svg'
 import smoothscroll from 'smoothscroll-polyfill';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { transition } from "./utils/CssHelper";
+import { Color } from "./constants/Color";
 
-const Theme = ({ state }) => {
+const Theme = ({ state, actions }) => {
+    const [overlayVisible, setOverlayVisible] = useState(true);
     const data = state.source.get(state.router.link);
 
     useEffect(() => {
         smoothscroll.polyfill();
+        setOverlayVisible(false);
+    }, [])
+
+    const handleHome = useCallback(() => {
+        actions.source.fetch('/');
+        setOverlayVisible(true);
+        setTimeout(() => {
+            actions.router.set('/');
+            setOverlayVisible(false);
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+            });
+        }, 300)
     }, [])
 
     return (
@@ -23,16 +41,17 @@ const Theme = ({ state }) => {
                 <html lang="en" />
             </Head>
             <Global styles={globalStyles} />
-            <Header />
+            <Header handleHome={handleHome} />
             <Main>
                 <Switch>
                     <Loading when={data.isFetching} />
                     <Posts when={data.isArchive} />
                     <Post when={data.isPostType} />
-                    <PageError when={data.isError} />
+                    <PageError when={data.isError} handleHome={handleHome} />
                 </Switch>
             </Main>
             <Footer />
+            <Overlay visible={overlayVisible} />
         </>
     );
 };
@@ -69,4 +88,17 @@ const globalStyles = css`
 const Main = styled.div`
     display: flex;
     justify-content: center;
+`;
+
+const Overlay = styled.div`
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: ${Color.White};
+    opacity: ${props => props.visible ? 1 : 0};
+    pointer-events: none;
+    ${transition};
 `;

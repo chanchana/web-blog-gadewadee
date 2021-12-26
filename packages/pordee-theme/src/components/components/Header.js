@@ -4,25 +4,22 @@ import { useResponsive } from "../hooks/useResponsive";
 import Logo from '../public/logo.svg'
 import { MobileNav } from "./MobileNav";
 
-const HeaderComponent = ({ state }) => {
+const HeaderComponent = ({ state, actions, handleHome }) => {
     const { isMobileOrTablet, isDesktop } = useResponsive();
-
     const desktopHeader = (
         <>
-            <Link link="/">
-                <LogoContainer>
-                    <LogoImage src={Logo} />
-                </LogoContainer>
-            </Link>
+            <LogoContainer onClick={handleHome}>
+                <LogoImage src={Logo} />
+            </LogoContainer>
             <DesktopNavContainer>
-                <DesktopNav />
+                <DesktopNav handleHome={handleHome} />
             </DesktopNavContainer>
         </>
     )
     return (
         <>
             <Container>
-                { isMobileOrTablet && <MobileNav /> }
+                { isMobileOrTablet && <MobileNav handleHome={handleHome} /> }
                 { isDesktop && desktopHeader }
             </Container>
         </>

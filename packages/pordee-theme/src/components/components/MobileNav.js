@@ -14,7 +14,7 @@ import { Text } from '../constants/Text';
 import { SearchBox } from './SearchBox';
 import { MobileHeader } from './MobileHeader';
 
-const MobileNavComponent = ({ state, actions }) => {
+const MobileNavComponent = ({ state, actions, handleHome }) => {
     const [menuOverlayVisible, setMenuOverlayVisible] = useState(false);
     const [searchOverlayVisible, setSearchOverlayVisible] = useState(false);
     const [expanded, setExpanded] = useState(false);
@@ -76,9 +76,7 @@ const MobileNavComponent = ({ state, actions }) => {
         <>
             <MobileNavContainer>
                 <InnerContainer>
-                    <Link link="/">
-                        <Icon src={LogoMobileSrc} />
-                    </Link>
+                    <Icon src={LogoMobileSrc} onClick={handleHome} />
                     <Icon src={SearchIconSrc} marginLeft="auto" onClick={handleOpenSearch}/>
                     <Icon src={MenuIconSrc} marginLeft="12px" onClick={() => setMenuOverlayVisible(true)} />
                 </InnerContainer>
