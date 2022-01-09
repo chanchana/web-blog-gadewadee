@@ -6,7 +6,7 @@ export const Text = {
     CategoryEtc: 'ไอเดียดี ๆ',
 
     FooterAbout: 'เกี่ยวกับเรา',
-    FooterAboutBody: '(Mock) ได้ทุนรัฐบาลญี่ปุ่นไปเรียนตรี-โท-เอก 8 ปี รักญี่ปุ่นและมุ่งมั่นเผยแพร่เรื่องราว Deepๆ Inside ของญี่ปุ่น ปัจจุบันสอนการตลาดอยู่ที่มหาวิทยาลัยรัฐบาลแห่งหนึ่งและเขียนบทความลงคอลัมน์ Japan Gossip ประจำ Marumura.com',
+    FooterAboutBody: 'พื้นที่แลกเปลี่ยน & เรียนรู้เรื่องธุรกิจและการตลาดดีดี',
     FooterCategory: 'หัวข้อหลัก',
     FooterContact: 'ติดต่อเรา',
 
